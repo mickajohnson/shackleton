@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import SocketContext from '../../context/SocketContext';
 
-const AddPlayer = ({ socket }) => {
+const AddPlayer = () => {
   const [name, setName] = useState('');
+
+  const socket = useContext(SocketContext);
 
   const handleInputChange = (e) => {
     setName(e.target.value);
@@ -14,7 +17,6 @@ const AddPlayer = ({ socket }) => {
 
   return (
     <div>
-      <h1>Players</h1>
       <input value={name} onChange={handleInputChange} />
       <button onClick={handleSubmit}>Submit</button>
     </div>
