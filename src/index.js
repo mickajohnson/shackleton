@@ -3,12 +3,15 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import { SocketContextProvider } from './context/SocketContext';
+import { PlayerContextProvider } from './context/PlayerContext';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <React.StrictMode>
     <SocketContextProvider>
-      <App />
+      <PlayerContextProvider>
+        <App />
+      </PlayerContextProvider>
     </SocketContextProvider>
   </React.StrictMode>,
   document.getElementById('root')

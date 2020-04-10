@@ -1,17 +1,17 @@
 import React, { useState, useContext } from 'react';
-import SocketContext from '../../context/SocketContext';
+import PlayerContext from '../../context/PlayerContext';
 
 const AddPlayer = () => {
   const [name, setName] = useState('');
 
-  const socket = useContext(SocketContext);
+  const { addPlayer } = useContext(PlayerContext);
 
   const handleInputChange = (e) => {
     setName(e.target.value);
   };
 
   const handleSubmit = () => {
-    socket.emit('addPlayer', name);
+    addPlayer(name);
     setName('');
   };
 

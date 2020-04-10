@@ -1,22 +1,9 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import AddPlayer from './components/AddPlayer';
-import SocketContext from './context/SocketContext';
+import PlayerContext from './context/PlayerContext';
 
 const App = () => {
-  const [players, setPlayers] = useState([]);
-
-  const socket = useContext(SocketContext);
-
-  useEffect(() => {
-    console.log(socket);
-
-    if (socket) {
-      socket.on('players', (data) => {
-        console.log(data);
-        setPlayers(data);
-      });
-    }
-  }, [socket]);
+  const { players, currentPlayer } = useContext(PlayerContext);
 
   return (
     <div style={{ textAlign: 'center' }}>
@@ -27,7 +14,7 @@ const App = () => {
           <p key={player}>{player}</p>
         ))}
       </ul>
-      <AddPlayer socket={socket} />
+      {currentPlayer ? <p>You are: {currentPlayer}</p> : <AddPlayer />}
     </div>
   );
 };
