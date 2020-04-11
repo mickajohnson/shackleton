@@ -7,6 +7,7 @@ const GameContext = createContext();
 
 export const GameContextProvider = ({ children }) => {
   const [gameStarted, setGameStarted] = useState(false);
+  const [hand, setHand] = useState([]);
 
   const socket = useContext(SocketContext);
   const { currentPlayer } = useContext(PlayerContext);
@@ -28,6 +29,14 @@ export const GameContextProvider = ({ children }) => {
     }
   }, [socket]);
 
+  useEffect(() => {
+    if (socket) {
+      socket.on('hand', (data) => {
+        setHand(data);
+      });
+    }
+  }, [socket]);
+
   const startGame = useCallback(
     (name) => socket.emit('startGame'),
 
@@ -37,7 +46,10 @@ export const GameContextProvider = ({ children }) => {
   const state = {
     gameStarted,
     startGame,
+    hand,
   };
+
+  console.log(hand);
 
   return <GameContext.Provider value={state}>{children}</GameContext.Provider>;
 };

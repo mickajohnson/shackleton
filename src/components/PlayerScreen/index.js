@@ -5,7 +5,8 @@ import GameContext from '../../context/GameContext';
 import styled from 'styled-components';
 
 const MatchingPlayer = styled.p`
-  color: green;
+  color: #3b3f65;
+  font-family: 'courier';
 `;
 
 const PlayerScreen = () => {
