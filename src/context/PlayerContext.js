@@ -10,11 +10,22 @@ export const PlayerContextProvider = ({ children }) => {
   const socket = useContext(SocketContext);
 
   useEffect(() => {
-    console.log(socket);
+    // const player = localStorage.getItem('player');
+    const player = null;
+    if (players.length > 0 && player && !currentPlayer) {
+      setCurrentPlayer(player);
+    }
+  }, [players, currentPlayer]);
 
+  useEffect(() => {
+    if (players.length === 0) {
+      localStorage.removeItem('player');
+    }
+  }, [players]);
+
+  useEffect(() => {
     if (socket) {
       socket.on('players', (data) => {
-        console.log(data);
         setPlayers(data);
       });
     }
@@ -24,6 +35,7 @@ export const PlayerContextProvider = ({ children }) => {
     (name) => {
       socket.emit('addPlayer', name);
       setCurrentPlayer(name);
+      localStorage.setItem('player', name);
     },
     [socket]
   );

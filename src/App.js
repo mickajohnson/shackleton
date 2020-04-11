@@ -1,21 +1,13 @@
 import React, { useContext } from 'react';
-import AddPlayer from './components/AddPlayer';
-import PlayerContext from './context/PlayerContext';
+import PlayerScreen from './components/PlayerScreen';
+import GameScreen from './components/GameScreen';
+import GameContext from './context/GameContext';
 
 const App = () => {
-  const { players, currentPlayer } = useContext(PlayerContext);
+  const { gameStarted } = useContext(GameContext);
 
   return (
-    <div style={{ textAlign: 'center' }}>
-      <h1>Players</h1>
-
-      <ul>
-        {players.map((player) => (
-          <p key={player}>{player}</p>
-        ))}
-      </ul>
-      {currentPlayer ? <p>You are: {currentPlayer}</p> : <AddPlayer />}
-    </div>
+    <div style={{ textAlign: 'center' }}>{gameStarted ? <GameScreen /> : <PlayerScreen />}</div>
   );
 };
 

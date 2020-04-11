@@ -5,12 +5,15 @@ import App from './App';
 import { SocketContextProvider } from './context/SocketContext';
 import { PlayerContextProvider } from './context/PlayerContext';
 import * as serviceWorker from './serviceWorker';
+import { GameContextProvider } from './context/GameContext';
 
 ReactDOM.render(
   <React.StrictMode>
     <SocketContextProvider>
       <PlayerContextProvider>
-        <App />
+        <GameContextProvider>
+          <App />
+        </GameContextProvider>
       </PlayerContextProvider>
     </SocketContextProvider>
   </React.StrictMode>,

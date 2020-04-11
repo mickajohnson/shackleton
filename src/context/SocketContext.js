@@ -6,7 +6,7 @@ const SocketContext = createContext();
 export const SocketContextProvider = ({ children }) => {
   const [socket, setSocket] = useState();
   useEffect(() => {
-    setSocket(socketIOClient('http://192.168.0.22:4001'));
+    setSocket(socketIOClient('http://localhost:4001'));
   }, []);
   return <SocketContext.Provider value={socket}>{children}</SocketContext.Provider>;
 };
