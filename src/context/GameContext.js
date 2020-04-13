@@ -8,23 +8,34 @@ const GameContext = createContext();
 export const GameContextProvider = ({ children }) => {
   const [gameStarted, setGameStarted] = useState(false);
   const [hand, setHand] = useState([]);
+  const [turnState, setTurnState] = useState({});
 
   const socket = useContext(SocketContext);
-  const { currentPlayer } = useContext(PlayerContext);
+  const { currentPlayer, players } = useContext(PlayerContext);
 
   const prevGameStarted = usePrevious(gameStarted);
   useEffect(() => {
     if (gameStarted && !prevGameStarted) {
-      console.log('sent thing');
-
       socket.emit('getCards', currentPlayer);
     }
-  }, [gameStarted, currentPlayer, prevGameStarted, socket]);
+  }, [gameStarted, currentPlayer, prevGameStarted, socket, players]);
+
+  const playCard = (player, cardId) => {
+    socket.emit('playCard', { player, cardId });
+  };
 
   useEffect(() => {
     if (socket) {
       socket.on('gameStarted', () => {
         setGameStarted(true);
+      });
+    }
+  }, [socket]);
+
+  useEffect(() => {
+    if (socket) {
+      socket.on('turnState', (data) => {
+        setTurnState(data);
       });
     }
   }, [socket]);
@@ -47,9 +58,9 @@ export const GameContextProvider = ({ children }) => {
     gameStarted,
     startGame,
     hand,
+    playCard,
+    turnState,
   };
-
-  console.log(hand);
 
   return <GameContext.Provider value={state}>{children}</GameContext.Provider>;
 };

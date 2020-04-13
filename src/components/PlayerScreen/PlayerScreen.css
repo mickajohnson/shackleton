@@ -1,0 +1,44 @@
+.matchingPlayer {
+  color: #3b3f65;
+}
+
+.player {
+  font-family: 'Dr Sugiyama', cursive;
+}
+
+.sugi {
+  font-family: 'Dr Sugiyama', cursive;
+}
+
+.logTitle {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Dr Sugiyama', cursive;
+
+  font-size: 24px;
+  margin: 7% 16% 20% 1%;
+}
+
+.playerContainer {
+  height: 100vh;
+  background-image: linear-gradient(220deg, #2d4976, #888d97);
+  position: relative;
+}
+
+.book {
+  position: absolute;
+  height: 100vh;
+  right: 40%;
+  background-image: url(./backgroundbook.png);
+  width: -webkit-fill-available;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.playersContainer {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
