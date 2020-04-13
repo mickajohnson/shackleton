@@ -1,13 +1,15 @@
 import React, { useContext } from 'react';
 import PlayerScreen from './components/PlayerScreen';
 import GameScreen from './components/GameScreen';
-import GameContext from './context/GameContext';
+import GameContext, { SIGN_IN } from './context/GameContext';
 
 const App = () => {
-  const { gameStarted } = useContext(GameContext);
+  const { gamePhase } = useContext(GameContext);
 
   return (
-    <div style={{ textAlign: 'center' }}>{gameStarted ? <GameScreen /> : <PlayerScreen />}</div>
+    <div style={{ textAlign: 'center' }}>
+      {gamePhase === SIGN_IN ? <PlayerScreen /> : <GameScreen />}
+    </div>
   );
 };
 
