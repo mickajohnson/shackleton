@@ -1,24 +1,21 @@
 import React, { useContext } from 'react';
 import { map } from 'lodash';
 import cardback from '../../assets/Card.svg';
+import './PlayArea.css';
 
 import GameContext from '../../context/GameContext';
+import Card from '../Card';
 
 const PlayArea = () => {
   const { turnState } = useContext(GameContext);
   console.log('turn', turnState);
 
   return (
-    <div>
+    <div className="playArea">
       {map(turnState, (card, player) => (
         <div key={player}>
           <p>{player}</p>
-          {card ? (
-            <div className="card" key={card.id}>
-              <img src={cardback} alt="card" className="cardImage" />
-              <p className="cardContent">{`${card.number} ${card.color}`}</p>
-            </div>
-          ) : null}
+          {card ? <Card card={card} /> : null}
         </div>
       ))}
     </div>
