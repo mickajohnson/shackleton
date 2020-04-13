@@ -4,6 +4,15 @@ import './YourHand.css';
 import PlayerContext from '../../context/PlayerContext';
 import HandCard from '../HandCard';
 
+const getRotation = (cards, cardIndex) => {
+  const middle = cards.length / 2;
+  return (cardIndex - middle) * 2;
+};
+
+const getTranslation = (cards, cardIndex) => Math.abs(getRotation(cards, cardIndex)) * 3;
+
+const getSeparation = (cards) => (cards.length > 15 ? 15 : cards.length);
+
 const GameScreen = () => {
   const { hand, playCard, trick, gamePhase } = useContext(GameContext);
   const { currentPlayer, captain, whoseTurn } = useContext(PlayerContext);
@@ -16,9 +25,28 @@ const GameScreen = () => {
     <div>
       {captain === currentPlayer && <div>You are captain</div>}
       <h2>Your Hand</h2>
-      {hand.map((card) => (
-        <HandCard canPlay={canPlay} onCardDoubleClick={handleCardClick} key={card.id} card={card} />
-      ))}
+      <div className="yourHand">
+        {hand.map((card, idx) => {
+          console.log(
+            `rotateZ(${getRotation(hand, idx)}deg) translate(0px ${getTranslation(hand, idx)}px)`
+          );
+          return (
+            <HandCard
+              canPlay={canPlay}
+              onCardDoubleClick={handleCardClick}
+              key={card.id}
+              card={card}
+              style={{
+                transform: `rotateZ(${getRotation(hand, idx)}deg) translate(0px,${getTranslation(
+                  hand,
+                  idx
+                )}px)`,
+                margin: `0 -${getSeparation(hand)}px`,
+              }}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 };

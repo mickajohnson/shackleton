@@ -20,7 +20,6 @@ const TaskSelectionArea = () => {
     <div className="taskSelectionArea">
       {map(selectableTasks, (taskCard) => (
         <React.Fragment key={taskCard.id}>
-          <p>Asignee: {taskCard.asignee}</p>
           <TaskCard
             card={taskCard}
             canSelect={currentPlayer === whoseTurn && !taskCard.asignee}

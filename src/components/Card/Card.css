@@ -1,12 +1,12 @@
 .cardImage {
   position: absolute;
-  height: 100px;
+  height: auto;
   width: 75px;
   left: 0;
   z-index: 0;
 }
 .card {
-  height: 100px;
+  height: 116.78px;
   width: 75px;
   position: relative;
   font-family: 'Dr Sugiyama', cursive;
@@ -15,4 +15,8 @@
 
 .cardContent {
   position: relative;
+  font-family: century gothic;
+  color: white;
+  left: 0%;
+  top: 26%;
 }

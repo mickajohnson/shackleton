@@ -13,7 +13,7 @@ const GameScreen = () => {
 
   return (
     <div className="playerContainer">
-      <h1>You are {currentPlayer}</h1>
+      <h1 className="App-header">You are {currentPlayer}</h1>
       <h2 className="App-header">Play Area</h2>
       <h3>{whoseTurn}'s Turn</h3>
       {gamePhase === TASK_SELECTION ? <TaskSelectionArea /> : <PlayArea />}

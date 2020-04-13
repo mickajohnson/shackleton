@@ -5,7 +5,7 @@ import './HandCard.css';
 import GameContext from '../../context/GameContext';
 import { every } from 'lodash';
 
-const HandCard = ({ onCardDoubleClick, card, canPlay }) => {
+const HandCard = ({ onCardDoubleClick, card, canPlay, style }) => {
   const { trickSuit, hand } = useContext(GameContext);
 
   const legalCard =
@@ -24,6 +24,7 @@ const HandCard = ({ onCardDoubleClick, card, canPlay }) => {
     <div
       className={classNames('card', { playable })}
       onDoubleClick={() => handleCardDoubleClick(card)}
+      style={style}
     >
       <Card card={card} />
     </div>
