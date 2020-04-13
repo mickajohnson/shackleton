@@ -1,18 +1,17 @@
 import React, { useContext } from 'react';
 import { map } from 'lodash';
-import cardback from '../../assets/Card.svg';
 import './PlayArea.css';
 
 import GameContext from '../../context/GameContext';
 import Card from '../Card';
 
 const PlayArea = () => {
-  const { turnState } = useContext(GameContext);
-  console.log('turn', turnState);
+  const { trick, trickWinner } = useContext(GameContext);
 
   return (
     <div className="playArea">
-      {map(turnState, (card, player) => (
+      <h4>{trickWinner ? `${trickWinner} wins trick` : null}</h4>
+      {map(trick, (card, player) => (
         <div key={player}>
           <p>{player}</p>
           {card ? <Card card={card} /> : null}

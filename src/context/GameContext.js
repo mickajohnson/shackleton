@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext, useCallback, useEffect } from 'react';
+import React, { createContext, useState, useContext, useEffect } from 'react';
 import SocketContext from './SocketContext';
 import PlayerContext from './PlayerContext';
 import usePrevious from '../hooks/usePrevious';
@@ -8,7 +8,9 @@ const GameContext = createContext();
 export const GameContextProvider = ({ children }) => {
   const [gameStarted, setGameStarted] = useState(false);
   const [hand, setHand] = useState([]);
-  const [turnState, setTurnState] = useState({});
+  const [trick, setTrick] = useState({});
+  const [trickSuit, setTrickSuit] = useState();
+  const [trickWinner, setTrickWinner] = useState();
 
   const socket = useContext(SocketContext);
   const { currentPlayer, players } = useContext(PlayerContext);
@@ -34,8 +36,8 @@ export const GameContextProvider = ({ children }) => {
 
   useEffect(() => {
     if (socket) {
-      socket.on('turnState', (data) => {
-        setTurnState(data);
+      socket.on('trick', (data) => {
+        setTrick(data);
       });
     }
   }, [socket]);
@@ -48,18 +50,32 @@ export const GameContextProvider = ({ children }) => {
     }
   }, [socket]);
 
-  const startGame = useCallback(
-    (name) => socket.emit('startGame'),
+  useEffect(() => {
+    if (socket) {
+      socket.on('trickWinner', (data) => {
+        setTrickWinner(data);
+      });
+    }
+  }, [socket]);
 
-    [socket]
-  );
+  useEffect(() => {
+    if (socket) {
+      socket.on('trickSuit', (data) => {
+        setTrickSuit(data);
+      });
+    }
+  }, [socket]);
+
+  const startGame = () => socket.emit('startGame');
 
   const state = {
     gameStarted,
     startGame,
     hand,
     playCard,
-    turnState,
+    trick,
+    trickSuit,
+    trickWinner,
   };
 
   return <GameContext.Provider value={state}>{children}</GameContext.Provider>;

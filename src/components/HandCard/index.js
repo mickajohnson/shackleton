@@ -1,10 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Card from '../Card';
 import classNames from 'classnames';
 import './HandCard.css';
+import GameContext from '../../context/GameContext';
+import { every } from 'lodash';
 
-const HandCard = ({ onCardDoubleClick, card, personAlreadyPlayed }) => {
-  const playable = !personAlreadyPlayed;
+const HandCard = ({ onCardDoubleClick, card, canPlay }) => {
+  const { trickSuit, hand } = useContext(GameContext);
+
+  const legalCard =
+    !trickSuit ||
+    card.color === trickSuit ||
+    every(hand, (cardInHand) => cardInHand.color !== trickSuit);
+
+  const playable = canPlay && legalCard;
 
   const handleCardDoubleClick = () => {
     if (playable) {

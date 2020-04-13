@@ -7,6 +7,7 @@ export const PlayerContextProvider = ({ children }) => {
   const [currentPlayer, setCurrentPlayer] = useState();
   const [players, setPlayers] = useState([]);
   const [captain, setCaptain] = useState();
+  const [whoseTurn, setWhoseTurn] = useState();
 
   const socket = useContext(SocketContext);
 
@@ -40,6 +41,14 @@ export const PlayerContextProvider = ({ children }) => {
     }
   }, [socket]);
 
+  useEffect(() => {
+    if (socket) {
+      socket.on('whoseTurn', (data) => {
+        setWhoseTurn(data);
+      });
+    }
+  }, [socket]);
+
   const addPlayer = useCallback(
     (name) => {
       socket.emit('addPlayer', name);
@@ -54,6 +63,7 @@ export const PlayerContextProvider = ({ children }) => {
     players,
     addPlayer,
     captain,
+    whoseTurn,
   };
 
   return <PlayerContext.Provider value={state}>{children}</PlayerContext.Provider>;
