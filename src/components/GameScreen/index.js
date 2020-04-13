@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import PlayArea from '../PlayArea';
 import YourHand from '../YourHand';
+import Tasks from '../Tasks';
 import TaskSelectionArea from '../TaskSelectionArea';
 import PlayerContext from '../../context/PlayerContext';
 import './GameScreen.css';
@@ -17,6 +18,7 @@ const GameScreen = () => {
       <h3>{whoseTurn}'s Turn</h3>
       {gamePhase === TASK_SELECTION ? <TaskSelectionArea /> : <PlayArea />}
       <YourHand />
+      <Tasks player={currentPlayer} />
     </div>
   );
 };

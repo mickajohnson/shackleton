@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useMemo } from 'react';
 import { map } from 'lodash';
 import './TaskSelectionArea.css';
 
@@ -10,13 +10,15 @@ const TaskSelectionArea = () => {
   const { tasks, selectTask } = useContext(GameContext);
   const { currentPlayer, whoseTurn } = useContext(PlayerContext);
 
+  const selectableTasks = useMemo(() => tasks.filter((task) => !task.asignee), [tasks]);
+
   const handleCardDoubleClick = (card) => {
     selectTask(currentPlayer, card.id);
   };
 
   return (
     <div className="taskSelectionArea">
-      {map(tasks, (taskCard) => (
+      {map(selectableTasks, (taskCard) => (
         <React.Fragment key={taskCard.id}>
           <p>Asignee: {taskCard.asignee}</p>
           <TaskCard
