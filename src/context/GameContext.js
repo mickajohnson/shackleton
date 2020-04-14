@@ -9,6 +9,8 @@ const GameContext = createContext();
 export const SIGN_IN = 'SIGN_IN';
 export const TASK_SELECTION = 'TASK_SELECTION';
 export const CARD_PLAYING = 'CARD_PLAYING';
+export const WON = 'WON';
+export const LOST = 'LOST';
 
 export const GameContextProvider = ({ children }) => {
   const [gamePhase, setGamePhase] = useState(SIGN_IN);
@@ -40,6 +42,22 @@ export const GameContextProvider = ({ children }) => {
     if (socket) {
       socket.on('gameStarted', () => {
         setGamePhase(TASK_SELECTION);
+      });
+    }
+  }, [socket]);
+
+  useEffect(() => {
+    if (socket) {
+      socket.on('won', () => {
+        setGamePhase(WON);
+      });
+    }
+  }, [socket]);
+
+  useEffect(() => {
+    if (socket) {
+      socket.on('lost', () => {
+        setGamePhase(LOST);
       });
     }
   }, [socket]);

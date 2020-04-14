@@ -1,14 +1,36 @@
 import React, { useContext } from 'react';
 import PlayerScreen from './components/PlayerScreen';
 import GameScreen from './components/GameScreen';
-import GameContext, { SIGN_IN } from './context/GameContext';
+import EndScreen from './components/EndScreen';
+import GameContext, {
+  SIGN_IN,
+  CARD_PLAYING,
+  TASK_SELECTION,
+  WON,
+  LOST,
+} from './context/GameContext';
+
+const Router = ({ gamePhase }) => {
+  switch (gamePhase) {
+    case SIGN_IN:
+      return <PlayerScreen />;
+    case CARD_PLAYING:
+    case TASK_SELECTION:
+      return <GameScreen />;
+    case LOST:
+    case WON:
+      return <EndScreen />;
+    default:
+      return null;
+  }
+};
 
 const App = () => {
   const { gamePhase } = useContext(GameContext);
 
   return (
     <div style={{ textAlign: 'center' }}>
-      {gamePhase === SIGN_IN ? <PlayerScreen /> : <GameScreen />}
+      <Router gamePhase={gamePhase} />
     </div>
   );
 };
