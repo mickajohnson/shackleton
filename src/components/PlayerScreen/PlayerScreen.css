@@ -33,13 +33,22 @@
 .book {
   position: absolute;
   height: 100vh;
-  right: 40%;
-  background-image: url(./backgroundbook.png);
+  right: 35%;
+  background-image: url(../../assets/backgroundbook.png);
+  width: -webkit-fill-available;
+  background-repeat: no-repeat;
+  background-size: contain;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.scrapbook {
+  position: absolute;
+  height: 100vh;
+  background-image: url(../../assets/Lander.png);
   width: -webkit-fill-available;
   background-repeat: no-repeat;
   background-size: cover;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
 }
 
 .playersContainer {

@@ -3,7 +3,6 @@ import AddPlayer from '../AddPlayer';
 import PlayerContext from '../../context/PlayerContext';
 import GameContext from '../../context/GameContext';
 import './PlayerScreen.css';
-import book from './backgroundbook.png';
 
 const PlayerScreen = () => {
   const { players, currentPlayer } = useContext(PlayerContext);
@@ -11,7 +10,7 @@ const PlayerScreen = () => {
 
   return (
     <div className="playerContainer">
-      <div className="book" src={book} alt="log book">
+      <div className="book">
         <div />
         <div className="bookContent">
           <div className="logTitle">
@@ -41,6 +40,7 @@ const PlayerScreen = () => {
           </div>
         </div>
       </div>
+      <div className="scrapbook" />
     </div>
   );
 };

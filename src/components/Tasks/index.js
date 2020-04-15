@@ -7,8 +7,6 @@ import TaskCard from '../TaskCard';
 
 const Tasks = ({ player }) => {
   const { tasks } = useContext(GameContext);
-  console.log('daf', tasks);
-
   const playerTasks = useMemo(() => tasks.filter((task) => task.asignee === player), [
     tasks,
     player,
