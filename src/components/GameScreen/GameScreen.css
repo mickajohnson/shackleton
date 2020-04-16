@@ -10,10 +10,10 @@
 
 .topGameScreen {
   display: grid;
-  grid-template-rows: 100px 1fr;
+  grid-template-rows: 110px 1fr;
 }
 
 .middleGameScreen {
   display: grid;
-  grid-template-columns: 100px 1fr 100px;
+  grid-template-columns: 118px 1fr 118px;
 }

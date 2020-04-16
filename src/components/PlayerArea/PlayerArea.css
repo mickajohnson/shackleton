@@ -35,5 +35,5 @@
 }
 
 .playerTasksRight {
-  transform: rotate(-90deg) translate(0px, 15px);
+  transform: rotate(-90deg) translate(0px, -15px);
 }
