@@ -1,0 +1,39 @@
+.playerArea {
+  display: flex;
+  align-items: center;
+}
+
+.playerAreaLeft {
+  padding-left: 5px;
+}
+
+.playerAreaTop {
+  padding-top: 5px;
+  flex-direction: column;
+}
+
+.playerAreaRight {
+  padding-right: 5px;
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.playerNameLeft {
+  transform: rotate(90deg);
+}
+
+.playerNameRight {
+  transform: rotate(-90deg);
+}
+
+.playerTasksLeft {
+  transform: rotate(90deg) translate(0px, -15px);
+}
+
+.playerTasksTop {
+  margin-top: 5px;
+}
+
+.playerTasksRight {
+  transform: rotate(-90deg) translate(0px, 15px);
+}

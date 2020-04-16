@@ -6,14 +6,22 @@ import TaskSelectionArea from '../TaskSelectionArea';
 import PlayerContext from '../../context/PlayerContext';
 import './GameScreen.css';
 import GameContext, { TASK_SELECTION } from '../../context/GameContext';
+import PlayerArea from '../PlayerArea';
 
 const GameScreen = () => {
-  const { whoseTurn, currentPlayer } = useContext(PlayerContext);
+  const { whoseTurn, currentPlayer, playerNumbers } = useContext(PlayerContext);
   const { gamePhase } = useContext(GameContext);
 
   return (
     <div className="gameScreenContainer">
-      {gamePhase === TASK_SELECTION ? <TaskSelectionArea /> : <PlayArea />}
+      <div className="topGameScreen">
+        <PlayerArea className="player2Area" player={playerNumbers[2]} orientation="top" />
+        <div className="middleGameScreen">
+          <PlayerArea className="player1Area" player={playerNumbers[1]} orientation="left" />
+          {gamePhase === TASK_SELECTION ? <TaskSelectionArea /> : <PlayArea />}
+          <PlayerArea className="player3Area" player={playerNumbers[3]} orientation="right" />
+        </div>
+      </div>
       <p className="noMargin">{whoseTurn}'s Turn</p>
       <Tasks player={currentPlayer} />
       <YourHand />

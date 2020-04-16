@@ -41,10 +41,9 @@ export const PlayerContextProvider = ({ children }) => {
         const currPlayerIndex = playerCopy.findIndex((player) => player === currentPlayer);
         const splicedPlayers = playerCopy.splice(currPlayerIndex);
         const reorderedPlayers = splicedPlayers.concat(playerCopy);
-        console.log(reorderedPlayers);
 
         reorderedPlayers.forEach((player, index) => {
-          setPlayerNumbers((current) => ({ ...current, [player]: index }));
+          setPlayerNumbers((current) => ({ ...current, [index]: player }));
         });
       });
     }
@@ -84,6 +83,7 @@ export const PlayerContextProvider = ({ children }) => {
     addPlayer,
     captain,
     whoseTurn,
+    playerNumbers,
   };
 
   return <PlayerContext.Provider value={state}>{children}</PlayerContext.Provider>;
