@@ -9,6 +9,7 @@ import GameContext, {
   WON,
   LOST,
 } from './context/GameContext';
+import './App.css';
 
 const Router = ({ gamePhase }) => {
   switch (gamePhase) {
@@ -29,7 +30,7 @@ const App = () => {
   const { gamePhase } = useContext(GameContext);
 
   return (
-    <div style={{ textAlign: 'center' }}>
+    <div className="mainContainer">
       <Router gamePhase={gamePhase} />
     </div>
   );

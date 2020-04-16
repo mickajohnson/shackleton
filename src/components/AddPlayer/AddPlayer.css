@@ -1,13 +1,18 @@
 .startButton {
   display: block;
   border-radius: 25px;
-  background: #31355e;
+  background: #1e324a;
   color: white;
   font-family: courier;
   border: none;
   padding: 14px 25px;
   font-size: 14px;
   width: 50%;
+  cursor: pointer;
+}
+
+.startButton:disabled {
+  cursor: not-allowed;
 }
 
 .form__group {
@@ -59,7 +64,7 @@
   display: block;
   transition: 0.2s;
   font-size: 1rem;
-  color: #31355e;
+  color: #1e324a;
   font-weight: 700;
 }
 /* reset input */

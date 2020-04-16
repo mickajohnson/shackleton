@@ -12,13 +12,11 @@ const GameScreen = () => {
   const { gamePhase } = useContext(GameContext);
 
   return (
-    <div className="playerContainer">
-      <h1 className="App-header">You are {currentPlayer}</h1>
-      <h2 className="App-header">Play Area</h2>
-      <h3>{whoseTurn}'s Turn</h3>
+    <div className="gameScreenContainer">
       {gamePhase === TASK_SELECTION ? <TaskSelectionArea /> : <PlayArea />}
-      <YourHand />
+      <p className="noMargin">{whoseTurn}'s Turn</p>
       <Tasks player={currentPlayer} />
+      <YourHand />
     </div>
   );
 };

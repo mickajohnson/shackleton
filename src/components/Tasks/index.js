@@ -14,7 +14,6 @@ const Tasks = ({ player }) => {
 
   return (
     <div className="tasksArea">
-      <div>Your Tasks</div>
       {map(playerTasks, (taskCard) => (
         <React.Fragment key={taskCard.id}>
           <TaskCard card={taskCard} canSelect={false} onCardDoubleClick={() => {}} />

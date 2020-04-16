@@ -1,3 +1,9 @@
-.App-header {
+.noMargin {
   margin: 0;
+}
+
+.gameScreenContainer {
+  display: grid;
+  grid-template-rows: 30px 1fr 105px 210px;
+  height: 100vh;
 }

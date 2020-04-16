@@ -27,25 +27,25 @@ const GameScreen = () => {
   const canPlay =
     !trick[currentPlayer] && whoseTurn === currentPlayer && gamePhase === CARD_PLAYING;
   return (
-    <div>
-      {captain === currentPlayer && <div>You are captain</div>}
-      <h2>Your Hand</h2>
-      <div className="yourHand">
-        {hand.map((card, idx) => (
-          <HandCard
-            canPlay={canPlay}
-            onCardDoubleClick={handleCardClick}
-            key={card.id}
-            card={card}
-            style={{
-              transform: `rotateZ(${getRotation(hand, idx)}deg) translate(0px,${getTranslation(
-                hand,
-                idx
-              )}%)`,
-              margin: `0 -${getSeparation(hand)}px`,
-            }}
-          />
-        ))}
+    <div className="yourHand">
+      {hand.map((card, idx) => (
+        <HandCard
+          canPlay={canPlay}
+          onCardDoubleClick={handleCardClick}
+          key={card.id}
+          card={card}
+          style={{
+            transform: `rotateZ(${getRotation(hand, idx)}deg) translate(0px,${getTranslation(
+              hand,
+              idx
+            )}%)`,
+            margin: `0 -${getSeparation(hand)}px`,
+          }}
+        />
+      ))}
+      <div className="currentPlayerName">
+        {currentPlayer}
+        {captain === currentPlayer && '(C)'}
       </div>
     </div>
   );

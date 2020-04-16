@@ -8,6 +8,7 @@ export const PlayerContextProvider = ({ children }) => {
   const [players, setPlayers] = useState([]);
   const [captain, setCaptain] = useState();
   const [whoseTurn, setWhoseTurn] = useState();
+  const [playerNumbers, setPlayerNumbers] = useState({});
 
   const socket = useContext(SocketContext);
 
@@ -19,11 +20,11 @@ export const PlayerContextProvider = ({ children }) => {
     }
   }, [players, currentPlayer]);
 
-  useEffect(() => {
-    if (players.length === 0) {
-      localStorage.removeItem('player');
-    }
-  }, [players]);
+  // useEffect(() => {
+  //   if (players.length === 0) {
+  //     localStorage.removeItem('player');
+  //   }
+  // }, [players]);
 
   useEffect(() => {
     if (socket) {
@@ -32,6 +33,24 @@ export const PlayerContextProvider = ({ children }) => {
       });
     }
   }, [socket]);
+
+  useEffect(() => {
+    if (socket) {
+      socket.on('gameStarted', () => {
+        const playerCopy = [...players];
+        const currPlayerIndex = playerCopy.findIndex((player) => player === currentPlayer);
+        const splicedPlayers = playerCopy.splice(currPlayerIndex);
+        const reorderedPlayers = splicedPlayers.concat(playerCopy);
+        console.log(reorderedPlayers);
+
+        reorderedPlayers.forEach((player, index) => {
+          setPlayerNumbers((current) => ({ ...current, [player]: index }));
+        });
+      });
+    }
+  }, [socket, players, currentPlayer]);
+
+  console.log(playerNumbers);
 
   useEffect(() => {
     if (socket) {
@@ -51,9 +70,10 @@ export const PlayerContextProvider = ({ children }) => {
 
   const addPlayer = useCallback(
     (name) => {
+      setPlayers((players) => [...players, name]);
       socket.emit('addPlayer', name);
       setCurrentPlayer(name);
-      localStorage.setItem('player', name);
+      // localStorage.setItem('player', name);
     },
     [socket]
   );

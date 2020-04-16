@@ -12,11 +12,8 @@ const TaskCard = ({ onCardDoubleClick, card, canSelect }) => {
     }
   };
   return (
-    <div
-      className={classNames('card', { selectable })}
-      onDoubleClick={() => handleCardDoubleClick(card)}
-    >
-      <Card card={card} />
+    <div className={classNames({ selectable })} onDoubleClick={() => handleCardDoubleClick(card)}>
+      <Card card={card} taskCard />
     </div>
   );
 };

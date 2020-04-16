@@ -10,6 +10,7 @@ const PlayerScreen = () => {
 
   return (
     <div className="playerContainer">
+      <div className="scrapbook" />
       <div className="book">
         <div />
         <div className="bookContent">
@@ -40,7 +41,6 @@ const PlayerScreen = () => {
           </div>
         </div>
       </div>
-      <div className="scrapbook" />
     </div>
   );
 };

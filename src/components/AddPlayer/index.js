@@ -33,7 +33,7 @@ const AddPlayer = () => {
           Name
         </label>
       </div>
-      <button className="startButton" onClick={handleSubmit}>
+      <button disabled={name.length < 1} className="startButton" onClick={handleSubmit}>
         Join our Voyage
       </button>
     </React.Fragment>

@@ -1,5 +1,13 @@
 .yourHand {
   display: flex;
   justify-content: center;
-  height: 200px;
+
+  width: 100%;
+}
+
+.currentPlayerName {
+  position: absolute;
+  width: 100%;
+  bottom: 35px;
+  pointer-events: none;
 }

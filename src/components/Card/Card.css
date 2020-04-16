@@ -22,3 +22,29 @@
   left: 0%;
   top: 26%;
 }
+
+.taskCardImage {
+  position: absolute;
+  height: auto;
+  width: 50px;
+  left: 0;
+  z-index: 0;
+}
+.taskCard {
+  height: 78px;
+  width: 50px;
+  position: relative;
+  font-family: 'Dr Sugiyama', cursive;
+  display: inline-block;
+  box-shadow: 2px 1px 2px #333;
+  border-radius: 4px;
+}
+
+.taskCardContent {
+  position: relative;
+  font-family: century gothic;
+  color: white;
+  left: 0%;
+  top: 34%;
+  margin: 0;
+}
