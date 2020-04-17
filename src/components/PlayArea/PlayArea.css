@@ -1,4 +1,38 @@
 .playArea {
   display: flex;
-  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.trickArea {
+  position: relative;
+  height: 210px;
+  width: 400px;
+}
+
+.currentPlayerTrickCard {
+  position: absolute;
+  bottom: 0;
+  right: 165px;
+}
+
+.playerOneTrickCard {
+  position: absolute;
+  left: 85px;
+  top: 50px;
+  transform: rotate(90deg);
+}
+
+.playerTwoTrickCard {
+  position: absolute;
+  top: 0;
+  right: 165px;
+}
+
+.playerThreeTrickCard {
+  position: absolute;
+  transform: rotate(-90deg);
+  right: 85px;
+  top: 50px;
 }

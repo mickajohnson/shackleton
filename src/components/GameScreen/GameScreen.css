@@ -4,7 +4,7 @@
 
 .gameScreenContainer {
   display: grid;
-  grid-template-rows: 1fr 18px 105px 190px;
+  grid-template-rows: 1fr 105px 190px;
   height: 100vh;
 }
 

@@ -1,22 +1,35 @@
 import React, { useContext } from 'react';
-import { map } from 'lodash';
 import './PlayArea.css';
 
 import GameContext from '../../context/GameContext';
+import PlayerContext from '../../context/PlayerContext';
 import Card from '../Card';
 
 const PlayArea = () => {
   const { trick, trickWinner } = useContext(GameContext);
+  const { playerNumbers, currentPlayer, whoseTurn, trickZIndices } = useContext(PlayerContext);
+
+  console.log(trickZIndices, { zIndex: trickZIndices[currentPlayer] });
 
   return (
     <div className="playArea">
-      <h4>{trickWinner ? `${trickWinner} wins trick` : null}</h4>
-      {map(trick, (card, player) => (
-        <div key={player}>
-          <p>{player}</p>
-          {card ? <Card card={card} /> : null}
+      <p className="announcement">
+        {trickWinner ? `${trickWinner} wins trick` : `${whoseTurn}'s Turn`}
+      </p>
+      <div className="trickArea">
+        <div style={{ zIndex: trickZIndices[currentPlayer] }} className="currentPlayerTrickCard">
+          {trick[currentPlayer] ? <Card card={trick[currentPlayer]} /> : null}
         </div>
-      ))}
+        <div style={{ zIndex: trickZIndices[playerNumbers[1]] }} className="playerOneTrickCard">
+          {trick[playerNumbers[1]] ? <Card card={trick[playerNumbers[1]]} /> : null}
+        </div>
+        <div style={{ zIndex: trickZIndices[playerNumbers[2]] }} className="playerTwoTrickCard">
+          {trick[playerNumbers[2]] ? <Card card={trick[playerNumbers[2]]} /> : null}
+        </div>
+        <div style={{ zIndex: trickZIndices[playerNumbers[3]] }} className="playerThreeTrickCard">
+          {trick[playerNumbers[3]] ? <Card card={trick[playerNumbers[3]]} /> : null}
+        </div>
+      </div>
     </div>
   );
 };

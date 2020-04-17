@@ -9,7 +9,7 @@ import GameContext, { TASK_SELECTION } from '../../context/GameContext';
 import PlayerArea from '../PlayerArea';
 
 const GameScreen = () => {
-  const { whoseTurn, currentPlayer, playerNumbers } = useContext(PlayerContext);
+  const { currentPlayer, playerNumbers } = useContext(PlayerContext);
   const { gamePhase } = useContext(GameContext);
 
   return (
@@ -22,7 +22,6 @@ const GameScreen = () => {
           <PlayerArea className="player3Area" player={playerNumbers[3]} orientation="right" />
         </div>
       </div>
-      <p className="noMargin">{whoseTurn}'s Turn</p>
       <Tasks player={currentPlayer} />
       <YourHand />
     </div>

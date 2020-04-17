@@ -1,7 +1,15 @@
 import React, { createContext, useState, useEffect, useContext, useCallback } from 'react';
+import { last, first, indexOf } from 'lodash';
 import SocketContext from './SocketContext';
 
 const PlayerContext = createContext();
+
+const reorderPlayers = (players, startingPlayer) => {
+  const currPlayerIndex = players.findIndex((player) => player === startingPlayer);
+  const splicedPlayers = players.splice(currPlayerIndex);
+  const reorderedPlayers = splicedPlayers.concat(players);
+  return reorderedPlayers;
+};
 
 export const PlayerContextProvider = ({ children }) => {
   const [currentPlayer, setCurrentPlayer] = useState();
@@ -9,6 +17,7 @@ export const PlayerContextProvider = ({ children }) => {
   const [captain, setCaptain] = useState();
   const [whoseTurn, setWhoseTurn] = useState();
   const [playerNumbers, setPlayerNumbers] = useState({});
+  const [trickZIndices, setTrickZIndices] = useState({});
 
   const socket = useContext(SocketContext);
 
@@ -36,11 +45,23 @@ export const PlayerContextProvider = ({ children }) => {
 
   useEffect(() => {
     if (socket) {
+      socket.on('trickLeader', (trickLeader) => {
+        const reorderedPlayers = reorderPlayers([...players], trickLeader);
+
+        const zIndexObject = {};
+        reorderedPlayers.forEach((player, idx) => {
+          zIndexObject[player] = idx + 1;
+        });
+
+        setTrickZIndices(zIndexObject);
+      });
+    }
+  }, [socket, players]);
+
+  useEffect(() => {
+    if (socket) {
       socket.on('gameStarted', () => {
-        const playerCopy = [...players];
-        const currPlayerIndex = playerCopy.findIndex((player) => player === currentPlayer);
-        const splicedPlayers = playerCopy.splice(currPlayerIndex);
-        const reorderedPlayers = splicedPlayers.concat(playerCopy);
+        const reorderedPlayers = reorderPlayers([...players], currentPlayer);
 
         reorderedPlayers.forEach((player, index) => {
           setPlayerNumbers((current) => ({ ...current, [index]: player }));
@@ -84,6 +105,7 @@ export const PlayerContextProvider = ({ children }) => {
     captain,
     whoseTurn,
     playerNumbers,
+    trickZIndices,
   };
 
   return <PlayerContext.Provider value={state}>{children}</PlayerContext.Provider>;
