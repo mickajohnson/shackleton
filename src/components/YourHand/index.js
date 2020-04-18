@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import GameContext, { CARD_PLAYING } from '../../context/GameContext';
 import './YourHand.css';
 import PlayerContext from '../../context/PlayerContext';
+import floe from '../../assets/floe.png';
 import HandCard from '../HandCard';
 
 const getDiffFromMiddle = (cards, cardIndex) => {
@@ -27,22 +28,26 @@ const GameScreen = () => {
   const canPlay =
     !trick[currentPlayer] && whoseTurn === currentPlayer && gamePhase === CARD_PLAYING;
   return (
-    <div className="yourHand">
-      {hand.map((card, idx) => (
-        <HandCard
-          canPlay={canPlay}
-          onCardDoubleClick={handleCardClick}
-          key={card.id}
-          card={card}
-          style={{
-            transform: `rotateZ(${getRotation(hand, idx)}deg) translate(0px,${getTranslation(
-              hand,
-              idx
-            )}%)`,
-            margin: `0 -${getSeparation(hand)}px`,
-          }}
-        />
-      ))}
+    <div className="yourArea">
+      <img className="mainPlayerFloe" src={floe} alt="Communication Token" />
+      <div className="yourHand">
+        {hand.map((card, idx) => (
+          <HandCard
+            canPlay={canPlay}
+            onCardDoubleClick={handleCardClick}
+            key={card.id}
+            card={card}
+            style={{
+              transform: `rotateZ(${getRotation(hand, idx)}deg) translate(0px,${getTranslation(
+                hand,
+                idx
+              )}%)`,
+              margin: `0 -${getSeparation(hand)}px`,
+            }}
+          />
+        ))}
+      </div>
+
       <div className="currentPlayerName">
         {currentPlayer}
         {captain === currentPlayer && '(C)'}

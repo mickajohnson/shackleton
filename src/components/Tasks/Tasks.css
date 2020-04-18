@@ -1,5 +1,60 @@
+.communicatorImage {
+  width: 50px;
+  box-shadow: 1px 1px 2px #2b2b2b;
+  border-radius: 30px;
+}
+
 .tasksArea {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.playerAreaLeft .tasksArea {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.playerAreaTop .tasksArea {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.playerAreaRight .tasksArea {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.playerAreaRight .tasksAndCommunicatorArea {
+  display: flex;
+  align-items: flex-start;
+  height: 100%;
+}
+
+.playerAreaTop .tasksAndCommunicatorArea {
+  display: flex;
+  justify-content: flex-start;
+  height: 100%;
+}
+
+.currentPlayerContainer .tasksAndCommunicatorArea {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 20px;
+  height: 100%;
+}
+
+.tasksAndCommunicatorArea {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  height: 100%;
+}
+
+.communcatorContainer {
+  margin: 0px 20px;
 }

@@ -27,6 +27,10 @@
   width: -webkit-fill-available;
   background-repeat: no-repeat;
   background-size: contain;
+}
+
+.bookContent {
+  width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
@@ -45,4 +49,28 @@
   display: flex;
   align-items: center;
   flex-direction: column;
+}
+
+@media only screen and (min-width: 1040px) {
+  .bookContent {
+    width: 99%;
+  }
+}
+
+@media only screen and (min-width: 1040px) {
+  .bookContent {
+    width: 99%;
+  }
+}
+
+@media only screen and (min-width: 1080px) {
+  .bookContent {
+    width: 97%;
+  }
+}
+
+@media only screen and (min-width: 1100px) {
+  .bookContent {
+    width: 81%;
+  }
 }

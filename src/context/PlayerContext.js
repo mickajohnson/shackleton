@@ -70,8 +70,6 @@ export const PlayerContextProvider = ({ children }) => {
     }
   }, [socket, players, currentPlayer]);
 
-  console.log(playerNumbers);
-
   useEffect(() => {
     if (socket) {
       socket.on('captain', (data) => {

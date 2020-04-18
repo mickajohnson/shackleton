@@ -10,6 +10,7 @@
 .playerAreaTop {
   padding-top: 5px;
   flex-direction: column;
+  grid-column-start: 2;
 }
 
 .playerAreaRight {
@@ -27,13 +28,16 @@
 }
 
 .playerTasksLeft {
-  transform: rotate(90deg) translate(0px, -15px);
+  /* transform: rotate(90deg) translate(0px, -15px); */
+  height: 100%;
 }
 
-.playerTasksTop {
+.playerAreaTop .playerTasks {
   margin-top: 5px;
+  width: 100%;
 }
 
 .playerTasksRight {
-  transform: rotate(-90deg) translate(0px, -15px);
+  /* transform: rotate(-90deg) translate(0px, -15px); */
+  height: 100%;
 }

@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import PlayerScreen from './components/PlayerScreen';
+import LoginScreen from './components/LoginScreen';
 import GameScreen from './components/GameScreen';
 import EndScreen from './components/EndScreen';
 import GameContext, {
@@ -14,7 +14,7 @@ import './App.css';
 const Router = ({ gamePhase }) => {
   switch (gamePhase) {
     case SIGN_IN:
-      return <PlayerScreen />;
+      return <LoginScreen />;
     case CARD_PLAYING:
     case TASK_SELECTION:
       return <GameScreen />;

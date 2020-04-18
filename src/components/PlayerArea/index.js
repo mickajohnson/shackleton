@@ -24,13 +24,13 @@ const PlayerArea = ({ orientation, player }) => {
         {player}
       </div>
       <div
-        className={classNames({
+        className={classNames('playerTasks', {
           playerTasksLeft: orientation === 'left',
           playerTasksTop: orientation === 'top',
           playerTasksRight: orientation === 'right',
         })}
       >
-        <Tasks player={player} />
+        <Tasks player={player} orientation={orientation} />
       </div>
     </div>
   );

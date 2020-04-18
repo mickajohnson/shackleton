@@ -4,13 +4,18 @@
 
 .gameScreenContainer {
   display: grid;
-  grid-template-rows: 1fr 105px 190px;
+  grid-template-rows: 1fr 18px 105px 190px;
   height: 100vh;
 }
 
 .topGameScreen {
   display: grid;
   grid-template-rows: 110px 1fr;
+}
+
+.topPlayerContainer {
+  display: grid;
+  grid-template-columns: 118px 1fr 118px;
 }
 
 .middleGameScreen {
