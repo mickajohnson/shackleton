@@ -35,7 +35,7 @@ const PlayerArea = ({ orientation, player }) => {
           playerTasksRight: orientation === 'right',
         })}
       >
-        <Tasks player={player} />
+        <Tasks player={player} orientation={orientation} />
       </div>
     </div>
   );

@@ -3,6 +3,13 @@
   height: fit-content;
 }
 
+.playerAreaLeft .taskCardComponent {
+  margin-top: 5px;
+}
+.playerAreaRight .taskCardComponent {
+  margin-top: 5px;
+}
+
 .taskCardComponent {
   position: relative;
 }

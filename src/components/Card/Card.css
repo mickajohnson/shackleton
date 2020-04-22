@@ -39,12 +39,35 @@
   box-shadow: 2px 1px 2px #333;
   border-radius: 4px;
 }
+.playerAreaLeft .taskCard {
+  height: 50px;
+  width: 78px;
+}
+.playerAreaLeft .taskCardImage {
+  width: 78px;
+}
+.playerAreaLeft .taskCardContent {
+  top: 29%;
+  left: 1%;
+  transform: rotate(90deg);
+}
+.playerAreaRight .taskCard {
+  height: 50px;
+  width: 78px;
+}
+.playerAreaRight .taskCardImage {
+  width: 78px;
+}
+.playerAreaRight .taskCardContent {
+  top: 28%;
+  transform: rotate(-90deg);
+}
 
 .taskCardContent {
   position: relative;
   font-family: century gothic;
   color: white;
   left: 0%;
-  top: 34%;
+  top: 35%;
   margin: 0;
 }

@@ -6,7 +6,7 @@ import GameContext from '../../context/GameContext';
 import communicationToken from '../../assets/helper_token.png';
 import TaskCard from '../TaskCard';
 
-const Tasks = ({ player }) => {
+const Tasks = ({ player, orientation }) => {
   const { tasks } = useContext(GameContext);
   const playerTasks = useMemo(() => tasks.filter((task) => task.asignee === player), [
     tasks,
@@ -21,7 +21,12 @@ const Tasks = ({ player }) => {
       <div className="tasksArea">
         {map(playerTasks, (taskCard) => (
           <React.Fragment key={taskCard.id}>
-            <TaskCard card={taskCard} canSelect={false} onCardDoubleClick={() => {}} />
+            <TaskCard
+              orientation={orientation}
+              card={taskCard}
+              canSelect={false}
+              onCardDoubleClick={() => {}}
+            />
           </React.Fragment>
         ))}
       </div>

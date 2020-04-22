@@ -7,9 +7,10 @@ import PlayerContext from '../../context/PlayerContext';
 import './GameScreen.css';
 import GameContext, { TASK_SELECTION } from '../../context/GameContext';
 import PlayerArea from '../PlayerArea';
+import Announcement from '../Announcement';
 
 const GameScreen = () => {
-  const { whoseTurn, currentPlayer, playerNumbers } = useContext(PlayerContext);
+  const { currentPlayer, playerNumbers } = useContext(PlayerContext);
   const { gamePhase } = useContext(GameContext);
 
   return (
@@ -30,7 +31,7 @@ const GameScreen = () => {
           ) : null}
         </div>
       </div>
-      <p className="noMargin">{whoseTurn}'s Turn</p>
+      <Announcement />
       <div className="currentPlayerContainer">
         <Tasks player={currentPlayer} />
       </div>

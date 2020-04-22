@@ -9,7 +9,7 @@ const Check = () => (
   </svg>
 );
 
-const TaskCard = ({ onCardDoubleClick, card, canSelect }) => {
+const TaskCard = ({ onCardDoubleClick, card, canSelect, orientation }) => {
   const selectable = canSelect;
 
   const handleCardDoubleClick = () => {
@@ -23,7 +23,7 @@ const TaskCard = ({ onCardDoubleClick, card, canSelect }) => {
         className={classNames('taskCardContainer', { selectable })}
         onDoubleClick={() => handleCardDoubleClick(card)}
       >
-        <Card card={card} taskCard />
+        <Card card={card} taskCard orientation={orientation} />
       </div>
       {card.success ? (
         <div className="completedOverlay">

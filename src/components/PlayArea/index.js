@@ -6,16 +6,13 @@ import PlayerContext from '../../context/PlayerContext';
 import Card from '../Card';
 
 const PlayArea = () => {
-  const { trick, trickWinner } = useContext(GameContext);
-  const { playerNumbers, currentPlayer, whoseTurn, trickZIndices } = useContext(PlayerContext);
+  const { trick } = useContext(GameContext);
+  const { playerNumbers, currentPlayer, trickZIndices } = useContext(PlayerContext);
 
   console.log(trickZIndices, { zIndex: trickZIndices[currentPlayer] });
 
   return (
     <div className="playArea">
-      <p className="announcement">
-        {trickWinner ? `${trickWinner} wins trick` : `${whoseTurn}'s Turn`}
-      </p>
       <div className="trickArea">
         <div style={{ zIndex: trickZIndices[currentPlayer] }} className="currentPlayerTrickCard">
           {trick[currentPlayer] ? <Card card={trick[currentPlayer]} /> : null}
