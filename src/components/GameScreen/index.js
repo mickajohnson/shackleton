@@ -16,12 +16,18 @@ const GameScreen = () => {
     <div className="gameScreenContainer">
       <div className="topGameScreen">
         <div className="topPlayerContainer">
-          <PlayerArea className="player2Area" player={playerNumbers[2]} orientation="top" />
+          {playerNumbers[2] ? (
+            <PlayerArea className="player2Area" player={playerNumbers[2]} orientation="top" />
+          ) : null}
         </div>
         <div className="middleGameScreen">
-          <PlayerArea className="player1Area" player={playerNumbers[1]} orientation="left" />
+          {playerNumbers[1] ? (
+            <PlayerArea className="player1Area" player={playerNumbers[1]} orientation="left" />
+          ) : null}
           {gamePhase === TASK_SELECTION ? <TaskSelectionArea /> : <PlayArea />}
-          <PlayerArea className="player3Area" player={playerNumbers[3]} orientation="right" />
+          {playerNumbers[3] ? (
+            <PlayerArea className="player3Area" player={playerNumbers[3]} orientation="right" />
+          ) : null}
         </div>
       </div>
       <p className="noMargin">{whoseTurn}'s Turn</p>

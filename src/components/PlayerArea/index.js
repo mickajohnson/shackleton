@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import classNames from 'classnames';
+import PlayerContext from '../../context/PlayerContext';
+import captainImg from '../../assets/captain.png';
 
 import Tasks from '../Tasks';
 
 import './PlayerArea.css';
 
 const PlayerArea = ({ orientation, player }) => {
+  const { captain } = useContext(PlayerContext);
+
   return (
     <div
       className={classNames('playerArea', {
@@ -22,6 +26,7 @@ const PlayerArea = ({ orientation, player }) => {
         })}
       >
         {player}
+        {captain === player && <img src={captainImg} alt="C" className="captainWheel" />}
       </div>
       <div
         className={classNames('playerTasks', {
@@ -30,7 +35,7 @@ const PlayerArea = ({ orientation, player }) => {
           playerTasksRight: orientation === 'right',
         })}
       >
-        <Tasks player={player} orientation={orientation} />
+        <Tasks player={player} />
       </div>
     </div>
   );

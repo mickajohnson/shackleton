@@ -3,7 +3,23 @@
   height: fit-content;
 }
 
+.taskCardComponent {
+  position: relative;
+}
+
 .taskCardContainer {
   display: inline-block;
   margin: 0px 5px;
+}
+
+.completedOverlay {
+  position: absolute;
+  height: 100%;
+  top: 0;
+  width: calc(100% - 10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff6b;
+  left: 5px;
 }

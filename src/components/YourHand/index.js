@@ -3,6 +3,7 @@ import GameContext, { CARD_PLAYING } from '../../context/GameContext';
 import './YourHand.css';
 import PlayerContext from '../../context/PlayerContext';
 import floe from '../../assets/floe.png';
+import captainImg from '../../assets/captain.png';
 import HandCard from '../HandCard';
 
 const getDiffFromMiddle = (cards, cardIndex) => {
@@ -27,6 +28,10 @@ const GameScreen = () => {
   };
   const canPlay =
     !trick[currentPlayer] && whoseTurn === currentPlayer && gamePhase === CARD_PLAYING;
+
+  if (!hand) {
+    return null;
+  }
   return (
     <div className="yourArea">
       <img className="mainPlayerFloe" src={floe} alt="Communication Token" />
@@ -50,7 +55,7 @@ const GameScreen = () => {
 
       <div className="currentPlayerName">
         {currentPlayer}
-        {captain === currentPlayer && '(C)'}
+        {captain === currentPlayer && <img src={captainImg} alt="C" className="captainWheel" />}
       </div>
     </div>
   );

@@ -1,13 +1,12 @@
 import React, { useContext, useMemo } from 'react';
 import { map } from 'lodash';
-import classNames from 'classnames';
 import './Tasks.css';
 
 import GameContext from '../../context/GameContext';
 import communicationToken from '../../assets/helper_token.png';
 import TaskCard from '../TaskCard';
 
-const Tasks = ({ player, orientation }) => {
+const Tasks = ({ player }) => {
   const { tasks } = useContext(GameContext);
   const playerTasks = useMemo(() => tasks.filter((task) => task.asignee === player), [
     tasks,
@@ -18,37 +17,15 @@ const Tasks = ({ player, orientation }) => {
   };
 
   return (
-    <div
-      className={classNames('tasksAndCommunicatorArea', {
-        tasksAndCommunicatorAreaBottom: orientation === 'bottom',
-        tasksAndCommunicatorAreaTop: orientation === 'top',
-        tasksAndCommunicatorAreaLeft: orientation === 'left',
-        tasksAndCommunicatorAreaRight: orientation === 'right',
-      })}
-    >
-      <div
-        className={classNames('tasksArea', {
-          tasksAreaBottom: orientation === 'bottom',
-          tasksAreaTop: orientation === 'top',
-          tasksAreaLeft: orientation === 'left',
-          tasksAreaRight: orientation === 'right',
-        })}
-      >
+    <div className="tasksAndCommunicatorArea">
+      <div className="tasksArea">
         {map(playerTasks, (taskCard) => (
           <React.Fragment key={taskCard.id}>
             <TaskCard card={taskCard} canSelect={false} onCardDoubleClick={() => {}} />
           </React.Fragment>
         ))}
       </div>
-      <div
-        className={classNames('communicatorContainer', {
-          communicatorContainerBottom: orientation === 'bottom',
-          communicatorContainerTop: orientation === 'top',
-          communicatorContainerLeft: orientation === 'left',
-          communicatorContainerRight: orientation === 'right',
-        })}
-        onClick={handleCommunicationClick}
-      >
+      <div className="communicatorContainer" onClick={handleCommunicationClick}>
         <img className="communicatorImage" src={communicationToken} alt="Communication Token" />
       </div>
     </div>

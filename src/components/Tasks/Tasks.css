@@ -4,6 +4,16 @@
   border-radius: 30px;
 }
 
+.playerAreaLeft .communicatorImage {
+  transform: rotate(90deg);
+}
+.playerAreaTop .communicatorImage {
+  transform: rotate(1800deg);
+}
+.playerAreaRight .communicatorImage {
+  transform: rotate(-90deg);
+}
+
 .tasksArea {
   display: flex;
   justify-content: center;
@@ -28,16 +38,25 @@
   align-items: center;
 }
 
+.playerAreaLeft .tasksAndCommunicatorArea {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  height: 100%;
+}
+
 .playerAreaRight .tasksAndCommunicatorArea {
   display: flex;
+  flex-direction: column-reverse;
   align-items: flex-start;
   height: 100%;
 }
 
 .playerAreaTop .tasksAndCommunicatorArea {
   display: flex;
-  justify-content: flex-start;
+  justify-content: flex-end;
   height: 100%;
+  flex-direction: row-reverse;
 }
 
 .currentPlayerContainer .tasksAndCommunicatorArea {
@@ -55,6 +74,18 @@
   height: 100%;
 }
 
-.communcatorContainer {
-  margin: 0px 20px;
+.currentPlayerContainer .communicatorContainer {
+  margin-left: 20px;
+}
+
+.playerAreaRight .communicatorContainer {
+  margin-bottom: 20px;
+}
+
+.playerAreaLeft .communicatorContainer {
+  margin-top: 20px;
+}
+
+.playerAreaTop .communicatorContainer {
+  margin-right: 20px;
 }
