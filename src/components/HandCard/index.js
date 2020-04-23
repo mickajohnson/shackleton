@@ -6,17 +6,20 @@ import GameContext from '../../context/GameContext';
 import { every } from 'lodash';
 
 const HandCard = ({ onCardDoubleClick, card, canPlay, style }) => {
-  const { trickSuit, hand } = useContext(GameContext);
+  const { trickSuit, hand, youAreCommunicating, playCommunicatorCard } = useContext(GameContext);
 
   const legalCard =
-    !trickSuit ||
-    card.color === trickSuit ||
-    every(hand, (cardInHand) => cardInHand.color !== trickSuit);
+    (!trickSuit ||
+      card.color === trickSuit ||
+      every(hand, (cardInHand) => cardInHand.color !== trickSuit)) &&
+    (youAreCommunicating !== true || card.color !== 'trump');
 
   const playable = canPlay && legalCard;
 
   const handleCardDoubleClick = () => {
-    if (playable) {
+    if (youAreCommunicating && playable) {
+      playCommunicatorCard(card.id);
+    } else if (playable) {
       onCardDoubleClick(card);
     }
   };

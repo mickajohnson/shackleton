@@ -9,8 +9,6 @@ const PlayArea = () => {
   const { trick } = useContext(GameContext);
   const { playerNumbers, currentPlayer, trickZIndices } = useContext(PlayerContext);
 
-  console.log(trickZIndices, { zIndex: trickZIndices[currentPlayer] });
-
   return (
     <div className="playArea">
       <div className="trickArea">

@@ -1,6 +1,7 @@
 .selectable {
   border: 2px solid green;
   height: fit-content;
+  cursor: pointer;
 }
 
 .playerAreaLeft .taskCardComponent {

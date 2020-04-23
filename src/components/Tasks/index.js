@@ -1,19 +1,25 @@
 import React, { useContext, useMemo } from 'react';
-import { map } from 'lodash';
+import classNames from 'classnames';
+import { map, every, values } from 'lodash';
 import './Tasks.css';
 
-import GameContext from '../../context/GameContext';
+import GameContext, { CARD_PLAYING } from '../../context/GameContext';
 import communicationToken from '../../assets/helper_token.png';
 import TaskCard from '../TaskCard';
 
 const Tasks = ({ player, orientation }) => {
-  const { tasks } = useContext(GameContext);
+  const { tasks, initiateCommunication, trick, gamePhase } = useContext(GameContext);
   const playerTasks = useMemo(() => tasks.filter((task) => task.asignee === player), [
     tasks,
     player,
   ]);
+
+  const canCommunicate = every(values(trick), (val) => val === null) && gamePhase === CARD_PLAYING;
+  // Can only communicate before trick and not in task selection - show this
   const handleCommunicationClick = () => {
-    console.log('f');
+    if (canCommunicate) {
+      initiateCommunication();
+    }
   };
 
   return (
@@ -30,8 +36,12 @@ const Tasks = ({ player, orientation }) => {
           </React.Fragment>
         ))}
       </div>
-      <div className="communicatorContainer" onClick={handleCommunicationClick}>
-        <img className="communicatorImage" src={communicationToken} alt="Communication Token" />
+      <div className={'communicatorContainer'} onClick={handleCommunicationClick}>
+        <img
+          className={classNames('communicatorImage', { canCommunicate })}
+          src={communicationToken}
+          alt="Communication Token"
+        />
       </div>
     </div>
   );

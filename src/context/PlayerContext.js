@@ -1,5 +1,4 @@
 import React, { createContext, useState, useEffect, useContext, useCallback } from 'react';
-import { last, first, indexOf } from 'lodash';
 import SocketContext from './SocketContext';
 
 const PlayerContext = createContext();

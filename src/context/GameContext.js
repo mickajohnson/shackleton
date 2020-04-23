@@ -19,6 +19,9 @@ export const GameContextProvider = ({ children }) => {
   const [trickSuit, setTrickSuit] = useState();
   const [trickWinner, setTrickWinner] = useState();
   const [tasks, setTasks] = useState([]);
+  const [communicationInfo, setCommunicationInfo] = useState({});
+  const [personCommunicating, setPersonCommunicating] = useState(null);
+  const [pickCommLocation, setPickCommLocation] = useState(null);
 
   const socket = useContext(SocketContext);
   const { currentPlayer, players } = useContext(PlayerContext);
@@ -34,8 +37,16 @@ export const GameContextProvider = ({ children }) => {
     socket.emit('playCard', { player, cardId });
   };
 
+  const playCommunicatorCard = (cardId) => {
+    socket.emit('playCommunicatorCard', { player: currentPlayer, cardId });
+  };
+
   const selectTask = (player, cardId) => {
     socket.emit('selectTask', { player, cardId });
+  };
+
+  const initiateCommunication = () => {
+    socket.emit('initiateCommunication', currentPlayer);
   };
 
   useEffect(() => {
@@ -45,6 +56,26 @@ export const GameContextProvider = ({ children }) => {
       });
     }
   }, [socket]);
+
+  useEffect(() => {
+    if (socket) {
+      socket.on('communicating', (person) => {
+        setPersonCommunicating(person);
+      });
+    }
+  }, [socket]);
+
+  useEffect(() => {
+    if (socket) {
+      socket.on('pickCommunicatorLocation"', () => {
+        console.log('1212121');
+
+        setPickCommLocation(true);
+      });
+    }
+  }, [socket]);
+
+  console.log(pickCommLocation);
 
   useEffect(() => {
     if (socket) {
@@ -85,6 +116,13 @@ export const GameContextProvider = ({ children }) => {
       });
     }
   }, [socket]);
+  useEffect(() => {
+    if (socket) {
+      socket.on('communicationInfo', (data) => {
+        setCommunicationInfo(data);
+      });
+    }
+  }, [socket]);
 
   useEffect(() => {
     if (socket) {
@@ -122,6 +160,12 @@ export const GameContextProvider = ({ children }) => {
     trickWinner,
     tasks,
     selectTask,
+    initiateCommunication,
+    personCommunicating,
+    youAreCommunicating: currentPlayer === personCommunicating,
+    playCommunicatorCard,
+    communicationInfo,
+    pickCommLocation,
   };
 
   return <GameContext.Provider value={state}>{children}</GameContext.Provider>;
