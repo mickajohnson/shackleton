@@ -3,6 +3,7 @@ import PlayArea from '../PlayArea';
 import YourHand from '../YourHand';
 import Tasks from '../Tasks';
 import TaskSelectionArea from '../TaskSelectionArea';
+import CommunicatorLocation from '../CommunicatorLocation';
 import PlayerContext from '../../context/PlayerContext';
 import './GameScreen.css';
 import GameContext, { TASK_SELECTION } from '../../context/GameContext';
@@ -11,7 +12,15 @@ import Announcement from '../Announcement';
 
 const GameScreen = () => {
   const { currentPlayer, playerNumbers } = useContext(PlayerContext);
-  const { gamePhase } = useContext(GameContext);
+  const { gamePhase, pickCommLocation } = useContext(GameContext);
+
+  const renderMiddleArea = () => {
+    if (gamePhase === TASK_SELECTION) {
+      return <TaskSelectionArea />;
+    }
+    if (pickCommLocation) return <CommunicatorLocation />;
+    return <PlayArea />;
+  };
 
   return (
     <div className="gameScreenContainer">
@@ -25,7 +34,7 @@ const GameScreen = () => {
           {playerNumbers[1] ? (
             <PlayerArea className="player1Area" player={playerNumbers[1]} orientation="left" />
           ) : null}
-          {gamePhase === TASK_SELECTION ? <TaskSelectionArea /> : <PlayArea />}
+          {renderMiddleArea()}
           {playerNumbers[3] ? (
             <PlayerArea className="player3Area" player={playerNumbers[3]} orientation="right" />
           ) : null}

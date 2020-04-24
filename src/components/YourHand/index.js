@@ -21,16 +21,22 @@ const getTranslation = (cards, cardIndex) =>
 const getSeparation = (cards) => (cards.length > 15 ? 15 : cards.length);
 
 const GameScreen = () => {
-  const { hand, playCard, trick, gamePhase, personCommunicating, youAreCommunicating } = useContext(
-    GameContext
-  );
-  const { currentPlayer, captain, whoseTurn, pickCommLocation } = useContext(PlayerContext);
+  const {
+    hand,
+    playCard,
+    trick,
+    gamePhase,
+    personCommunicating,
+    youAreCommunicating,
+    pickCommLocation,
+  } = useContext(GameContext);
+  const { currentPlayer, captain, whoseTurn } = useContext(PlayerContext);
   const handleCardClick = (card) => {
     playCard(currentPlayer, card.id);
   };
   const canPlay =
     !trick[currentPlayer] &&
-    whoseTurn === currentPlayer &&
+    (whoseTurn === currentPlayer || youAreCommunicating) &&
     gamePhase === CARD_PLAYING &&
     (personCommunicating === null || youAreCommunicating) &&
     !pickCommLocation;

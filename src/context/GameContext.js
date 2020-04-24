@@ -41,6 +41,10 @@ export const GameContextProvider = ({ children }) => {
     socket.emit('playCommunicatorCard', { player: currentPlayer, cardId });
   };
 
+  const chooseCommunicatorLocation = (location) => {
+    socket.emit('chooseCommunicatorLocation', { player: currentPlayer, location });
+  };
+
   const selectTask = (player, cardId) => {
     socket.emit('selectTask', { player, cardId });
   };
@@ -67,15 +71,20 @@ export const GameContextProvider = ({ children }) => {
 
   useEffect(() => {
     if (socket) {
-      socket.on('pickCommunicatorLocation"', () => {
-        console.log('1212121');
-
-        setPickCommLocation(true);
+      socket.on('communicationOver', () => {
+        setPersonCommunicating(null);
+        setPickCommLocation(null);
       });
     }
   }, [socket]);
 
-  console.log(pickCommLocation);
+  useEffect(() => {
+    if (socket) {
+      socket.on('pickCommunicatorLocation', () => {
+        setPickCommLocation(true);
+      });
+    }
+  }, [socket]);
 
   useEffect(() => {
     if (socket) {
@@ -150,6 +159,8 @@ export const GameContextProvider = ({ children }) => {
 
   const startGame = () => socket.emit('startGame');
 
+  console.log(communicationInfo);
+
   const state = {
     gamePhase,
     startGame,
@@ -166,6 +177,7 @@ export const GameContextProvider = ({ children }) => {
     playCommunicatorCard,
     communicationInfo,
     pickCommLocation,
+    chooseCommunicatorLocation,
   };
 
   return <GameContext.Provider value={state}>{children}</GameContext.Provider>;
