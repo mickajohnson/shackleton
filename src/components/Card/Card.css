@@ -39,6 +39,32 @@
   box-shadow: 2px 1px 2px #333;
   border-radius: 4px;
 }
+.playedCommArea .card {
+  height: 78px;
+  width: 50px;
+  position: relative;
+  font-family: 'Dr Sugiyama', cursive;
+  display: inline-block;
+  box-shadow: 2px 1px 2px #333;
+  border-radius: 4px;
+}
+.playedCommArea .cardImage {
+  position: absolute;
+  height: auto;
+  width: 50px;
+  left: 0;
+  z-index: 0;
+}
+
+.playedCommArea .cardContent {
+  position: relative;
+  font-family: century gothic;
+  color: white;
+  left: 0%;
+  top: 35%;
+  margin: 0;
+}
+
 .playerAreaLeft .taskCard {
   height: 50px;
   width: 78px;
@@ -59,6 +85,30 @@
   width: 78px;
 }
 .playerAreaRight .taskCardContent {
+  top: 28%;
+  transform: rotate(-90deg);
+}
+
+.playerAreaLeft .card {
+  height: 50px;
+  width: 78px;
+}
+.playerAreaLeft .cardImage {
+  width: 78px;
+}
+.playerAreaLeft .cardContent {
+  top: 29%;
+  left: 1%;
+  transform: rotate(90deg);
+}
+.playerAreaRight .card {
+  height: 50px;
+  width: 78px;
+}
+.playerAreaRight .cardImage {
+  width: 78px;
+}
+.playerAreaRight .cardContent {
   top: 28%;
   transform: rotate(-90deg);
 }

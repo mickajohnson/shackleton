@@ -100,3 +100,104 @@
 .playerAreaTop .communicatorContainer {
   margin-right: 20px;
 }
+.currentPlayerContainer .playedCommArea {
+  margin-left: 20px;
+}
+
+.playerAreaRight .playedCommArea {
+  margin-bottom: 20px;
+}
+
+.playerAreaLeft .playedCommArea {
+  margin-top: 20px;
+}
+
+.playerAreaTop .playedCommArea {
+  margin-right: 20px;
+}
+
+.playedCommTokenContainer {
+  position: absolute;
+  width: 30px;
+}
+
+.currentPlayerContainer .playedCommTokenContainer {
+  position: absolute;
+  right: -15px;
+  width: 30px;
+}
+
+.currentPlayerContainer .commTop {
+  top: -10px;
+}
+
+.currentPlayerContainer .commMiddle {
+  top: 22px;
+}
+
+.currentPlayerContainer .commBottom {
+  bottom: -5px;
+}
+
+.playerAreaLeft .playedCommTokenContainer {
+  bottom: -16px;
+}
+
+.playerAreaLeft .commTop {
+  right: -10px;
+}
+
+.playerAreaLeft .commMiddle {
+  right: 23px;
+}
+
+.playerAreaLeft .commBottom {
+  left: -10px;
+}
+
+.playerAreaRight .playedCommTokenContainer {
+  top: -10px;
+}
+
+.playerAreaRight .commTop {
+  left: -10px;
+}
+
+.playerAreaRight .commMiddle {
+  right: 26px;
+}
+
+.playerAreaRight .commBottom {
+  right: -10px;
+}
+
+.playerAreaTop .playedCommTokenContainer {
+  left: -10px;
+}
+
+.playerAreaTop .commTop {
+  top: -10px;
+}
+
+.playerAreaTop .commMiddle {
+  top: 23px;
+}
+
+.playerAreaTop .commBottom {
+  bottom: -10px;
+}
+
+.playedCommArea {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.playedCommArea .communicatorImage {
+  width: 30px;
+}
+
+.commDescription {
+  position: absolute;
+  bottom: -20px;
+}

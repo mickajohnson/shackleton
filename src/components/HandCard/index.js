@@ -2,11 +2,33 @@ import React, { useContext } from 'react';
 import Card from '../Card';
 import classNames from 'classnames';
 import './HandCard.css';
-import GameContext from '../../context/GameContext';
+import GameContext, { CARD_PLAYING } from '../../context/GameContext';
+import PlayerContext from '../../context/PlayerContext';
 import { every } from 'lodash';
 
-const HandCard = ({ onCardDoubleClick, card, canPlay, style }) => {
-  const { trickSuit, hand, youAreCommunicating, playCommunicatorCard } = useContext(GameContext);
+const HandCard = ({ card, style, player, orientation }) => {
+  const {
+    trickSuit,
+    hand,
+    youAreCommunicating,
+    playCommunicatorCard,
+    trick,
+    gamePhase,
+    personCommunicating,
+    pickCommLocation,
+    playCard,
+  } = useContext(GameContext);
+  const { currentPlayer, whoseTurn } = useContext(PlayerContext);
+
+  console.log(player, currentPlayer, player === currentPlayer, card.number, card.color);
+
+  const canPlay =
+    player === currentPlayer &&
+    !trick[player] &&
+    (whoseTurn === player || youAreCommunicating) &&
+    gamePhase === CARD_PLAYING &&
+    (personCommunicating === null || youAreCommunicating) &&
+    !pickCommLocation;
 
   const legalCard =
     (!trickSuit ||
@@ -20,7 +42,7 @@ const HandCard = ({ onCardDoubleClick, card, canPlay, style }) => {
     if (youAreCommunicating && playable) {
       playCommunicatorCard(card.id);
     } else if (playable) {
-      onCardDoubleClick(card);
+      playCard(player, card.id);
     }
   };
   return (
@@ -29,9 +51,13 @@ const HandCard = ({ onCardDoubleClick, card, canPlay, style }) => {
       onDoubleClick={() => handleCardDoubleClick(card)}
       style={style}
     >
-      <Card card={card} />
+      <Card card={card} orientation={orientation} />
     </div>
   );
+};
+
+HandCard.defaultProps = {
+  orientation: null,
 };
 
 export default HandCard;

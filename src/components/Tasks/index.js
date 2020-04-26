@@ -7,6 +7,13 @@ import GameContext, { CARD_PLAYING } from '../../context/GameContext';
 import communicationToken from '../../assets/helper_token.png';
 import TaskCard from '../TaskCard';
 import PlayerContext from '../../context/PlayerContext';
+import HandCard from '../HandCard';
+
+const positionMapping = {
+  top: 'Highest',
+  middle: 'Only',
+  bottom: 'Lowest',
+};
 
 const Tasks = ({ player, orientation }) => {
   const {
@@ -23,7 +30,8 @@ const Tasks = ({ player, orientation }) => {
     player,
   ]);
 
-  const haveAlreadyCommunicated = get(communicationInfo, [player, 'played'], null);
+  const playerCommInfo = get(communicationInfo, player, {});
+  const haveAlreadyCommunicated = playerCommInfo.played;
 
   const canCommunicate =
     every(values(trick), (val) => val === null) &&
@@ -31,7 +39,7 @@ const Tasks = ({ player, orientation }) => {
     player === currentPlayer &&
     !personCommunicating &&
     !haveAlreadyCommunicated;
-  // Can only communicate before trick and not in task selection - show this
+
   const handleCommunicationClick = () => {
     if (canCommunicate) {
       initiateCommunication();
@@ -53,7 +61,19 @@ const Tasks = ({ player, orientation }) => {
         ))}
       </div>
       {haveAlreadyCommunicated ? (
-        <div>You Stupid</div>
+        <div className="playedCommArea">
+          <HandCard player={player} card={playerCommInfo.card} orientation={orientation} />
+          <div
+            className={classNames('playedCommTokenContainer', {
+              commTop: playerCommInfo.position === 'top',
+              commMiddle: playerCommInfo.position === 'middle',
+              commBottom: playerCommInfo.position === 'bottom',
+            })}
+          >
+            <img className="communicatorImage" src={communicationToken} alt="Communication Token" />
+          </div>
+          <span className="commDescription">{positionMapping[playerCommInfo.position]}</span>
+        </div>
       ) : (
         <div className={'communicatorContainer'} onDoubleClick={handleCommunicationClick}>
           <img

@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import GameContext, { CARD_PLAYING } from '../../context/GameContext';
+import GameContext from '../../context/GameContext';
 import './YourHand.css';
 import PlayerContext from '../../context/PlayerContext';
 import floe from '../../assets/floe.png';
@@ -21,25 +21,8 @@ const getTranslation = (cards, cardIndex) =>
 const getSeparation = (cards) => (cards.length > 15 ? 15 : cards.length);
 
 const GameScreen = () => {
-  const {
-    hand,
-    playCard,
-    trick,
-    gamePhase,
-    personCommunicating,
-    youAreCommunicating,
-    pickCommLocation,
-  } = useContext(GameContext);
-  const { currentPlayer, captain, whoseTurn } = useContext(PlayerContext);
-  const handleCardClick = (card) => {
-    playCard(currentPlayer, card.id);
-  };
-  const canPlay =
-    !trick[currentPlayer] &&
-    (whoseTurn === currentPlayer || youAreCommunicating) &&
-    gamePhase === CARD_PLAYING &&
-    (personCommunicating === null || youAreCommunicating) &&
-    !pickCommLocation;
+  const { hand } = useContext(GameContext);
+  const { currentPlayer, captain } = useContext(PlayerContext);
 
   if (!hand) {
     return null;
@@ -50,10 +33,9 @@ const GameScreen = () => {
       <div className="yourHand">
         {hand.map((card, idx) => (
           <HandCard
-            canPlay={canPlay}
-            onCardDoubleClick={handleCardClick}
             key={card.id}
             card={card}
+            player={currentPlayer}
             style={{
               transform: `rotateZ(${getRotation(hand, idx)}deg) translate(0px,${getTranslation(
                 hand,
