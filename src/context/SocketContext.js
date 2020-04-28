@@ -5,7 +5,6 @@ const SocketContext = createContext();
 
 export const SocketContextProvider = ({ children }) => {
   const [socket, setSocket] = useState();
-  console.log(process.env.REACT_APP_BACKEND_URL);
 
   useEffect(() => {
     setSocket(socketIOClient(process.env.REACT_APP_BACKEND_URL));
