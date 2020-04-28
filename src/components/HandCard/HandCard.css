@@ -2,3 +2,8 @@
   border: 2px solid green;
   cursor: pointer;
 }
+
+.notPlayable {
+  border: 2px solid transparent;
+  cursor: default;
+}

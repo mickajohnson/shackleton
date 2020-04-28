@@ -3,6 +3,8 @@ import './CommunicatorLocation.css';
 import GameContext from '../../context/GameContext';
 
 const CommunicatorLocation = () => {
+  // TODO: check that card is either lowest, highest or only of suit and only allow those options
+
   const { chooseCommunicatorLocation } = useContext(GameContext);
   return (
     <div className="communicatorLocationContainer">

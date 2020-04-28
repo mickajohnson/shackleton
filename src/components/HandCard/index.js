@@ -29,12 +29,17 @@ const HandCard = ({ card, style, player, orientation }) => {
     !pickCommLocation;
 
   const legalCard =
-    (!trickSuit ||
-      card.color === trickSuit ||
-      every(hand, (cardInHand) => cardInHand.color !== trickSuit)) &&
-    (youAreCommunicating !== true || card.color !== 'trump');
+    !trickSuit ||
+    card.color === trickSuit ||
+    every(hand, (cardInHand) => cardInHand.color !== trickSuit);
 
-  const playable = canPlay && legalCard;
+  // TODO: check that card is either lowest, highest or only of suit
+  const legalCommunication = card.color !== 'trump';
+
+  const playable =
+    canPlay &&
+    ((youAreCommunicating !== true && legalCard) ||
+      (youAreCommunicating === true && legalCommunication));
 
   const handleCardDoubleClick = () => {
     if (youAreCommunicating && playable) {
@@ -45,7 +50,7 @@ const HandCard = ({ card, style, player, orientation }) => {
   };
   return (
     <div
-      className={classNames('card', { playable })}
+      className={classNames('card', { playable, notPlayable: !playable })}
       onDoubleClick={() => handleCardDoubleClick(card)}
       style={style}
     >

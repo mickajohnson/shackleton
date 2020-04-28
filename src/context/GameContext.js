@@ -11,6 +11,7 @@ export const TASK_SELECTION = 'TASK_SELECTION';
 export const CARD_PLAYING = 'CARD_PLAYING';
 export const WON = 'WON';
 export const LOST = 'LOST';
+export const MISSION_SELECT = 'MISSION_SELECT';
 
 export const GameContextProvider = ({ children }) => {
   const [gamePhase, setGamePhase] = useState(SIGN_IN);
@@ -28,7 +29,7 @@ export const GameContextProvider = ({ children }) => {
 
   const prevGamePhase = usePrevious(gamePhase);
   useEffect(() => {
-    if (gamePhase === TASK_SELECTION && prevGamePhase === SIGN_IN) {
+    if (gamePhase === TASK_SELECTION && prevGamePhase !== TASK_SELECTION) {
       socket.emit('getCards', currentPlayer);
     }
   }, [gamePhase, currentPlayer, prevGamePhase, socket, players]);
@@ -49,6 +50,10 @@ export const GameContextProvider = ({ children }) => {
     socket.emit('selectTask', { player, cardId });
   };
 
+  const selectMission = (mission) => {
+    socket.emit('selectMission', mission);
+  };
+
   const initiateCommunication = () => {
     socket.emit('initiateCommunication', currentPlayer);
   };
@@ -57,6 +62,14 @@ export const GameContextProvider = ({ children }) => {
     if (socket) {
       socket.on('gameStarted', () => {
         setGamePhase(TASK_SELECTION);
+      });
+    }
+  }, [socket]);
+
+  useEffect(() => {
+    if (socket) {
+      socket.on('missionSelect', () => {
+        setGamePhase(MISSION_SELECT);
       });
     }
   }, [socket]);
@@ -159,8 +172,6 @@ export const GameContextProvider = ({ children }) => {
 
   const startGame = () => socket.emit('startGame');
 
-  console.log(communicationInfo);
-
   const state = {
     gamePhase,
     startGame,
@@ -178,6 +189,7 @@ export const GameContextProvider = ({ children }) => {
     communicationInfo,
     pickCommLocation,
     chooseCommunicatorLocation,
+    selectMission,
   };
 
   return <GameContext.Provider value={state}>{children}</GameContext.Provider>;
