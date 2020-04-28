@@ -5,8 +5,10 @@ const SocketContext = createContext();
 
 export const SocketContextProvider = ({ children }) => {
   const [socket, setSocket] = useState();
+  console.log(process.env.REACT_APP_BACKEND_URL);
+
   useEffect(() => {
-    setSocket(socketIOClient('http://localhost:4001'));
+    setSocket(socketIOClient(process.env.REACT_APP_BACKEND_URL));
   }, []);
   return <SocketContext.Provider value={socket}>{children}</SocketContext.Provider>;
 };
