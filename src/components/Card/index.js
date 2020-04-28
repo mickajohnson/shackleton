@@ -15,6 +15,11 @@ import yellow_right from '../../assets/yellow_right.png';
 import red_right from '../../assets/red_right.png';
 import blue_right from '../../assets/blue_right.png';
 import green_right from '../../assets/green_right.png';
+import trump_top from '../../assets/trump_top.png';
+import yellow_top from '../../assets/yellow_top.png';
+import red_top from '../../assets/red_top.png';
+import blue_top from '../../assets/blue_top.png';
+import green_top from '../../assets/green_top.png';
 import './Card.css';
 
 const sources = {
@@ -23,11 +28,6 @@ const sources = {
   red,
   yellow,
   trump,
-  green_top: green,
-  blue_top: blue,
-  red_top: red,
-  yellow_top: yellow,
-  trump_top: trump,
   green_left,
   blue_left,
   red_left,
@@ -38,6 +38,11 @@ const sources = {
   red_right,
   yellow_right,
   trump_right,
+  green_top,
+  blue_top,
+  red_top,
+  yellow_top,
+  trump_top,
 };
 
 const Card = ({ card, taskCard, orientation }) => {

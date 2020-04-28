@@ -65,6 +65,17 @@
   margin: 0;
 }
 
+.playerAreaTop .taskCardContent {
+  top: 38%;
+  left: 1%;
+  transform: rotate(180deg);
+}
+.playerAreaTop .cardContent {
+  top: 38%;
+  left: 1%;
+  transform: rotate(180deg);
+}
+
 .playerAreaLeft .taskCard {
   height: 50px;
   width: 78px;

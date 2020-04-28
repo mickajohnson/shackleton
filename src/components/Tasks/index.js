@@ -5,6 +5,7 @@ import './Tasks.css';
 
 import GameContext, { CARD_PLAYING } from '../../context/GameContext';
 import communicationToken from '../../assets/helper_token.png';
+import flippedCommToken from '../../assets/helper_token_inactive.png';
 import TaskCard from '../TaskCard';
 import PlayerContext from '../../context/PlayerContext';
 import HandCard from '../HandCard';
@@ -46,6 +47,52 @@ const Tasks = ({ player, orientation }) => {
     }
   };
 
+  const renderComm = () => {
+    if (haveAlreadyCommunicated) {
+      if (playerCommInfo.card) {
+        return (
+          <div className="playedCommArea">
+            <HandCard player={player} card={playerCommInfo.card} orientation={orientation} />
+            <div
+              className={classNames('playedCommTokenContainer', {
+                commTop: playerCommInfo.position === 'top',
+                commMiddle: playerCommInfo.position === 'middle',
+                commBottom: playerCommInfo.position === 'bottom',
+              })}
+            >
+              <img
+                className="communicatorImage"
+                src={communicationToken}
+                alt="Communication Token"
+              />
+            </div>
+            <span className="commDescription">{positionMapping[playerCommInfo.position]}</span>
+          </div>
+        );
+      } else {
+        return (
+          <div className={'communicatorContainer'}>
+            <img
+              className={classNames('communicatorImage')}
+              src={flippedCommToken}
+              alt="Flipped Communication Token"
+            />
+          </div>
+        );
+      }
+    }
+
+    return (
+      <div className={'communicatorContainer'} onDoubleClick={handleCommunicationClick}>
+        <img
+          className={classNames('communicatorImage', { canCommunicate })}
+          src={communicationToken}
+          alt="Communication Token"
+        />
+      </div>
+    );
+  };
+
   return (
     <div className="tasksAndCommunicatorArea">
       <div className="tasksArea">
@@ -60,29 +107,7 @@ const Tasks = ({ player, orientation }) => {
           </React.Fragment>
         ))}
       </div>
-      {haveAlreadyCommunicated ? (
-        <div className="playedCommArea">
-          <HandCard player={player} card={playerCommInfo.card} orientation={orientation} />
-          <div
-            className={classNames('playedCommTokenContainer', {
-              commTop: playerCommInfo.position === 'top',
-              commMiddle: playerCommInfo.position === 'middle',
-              commBottom: playerCommInfo.position === 'bottom',
-            })}
-          >
-            <img className="communicatorImage" src={communicationToken} alt="Communication Token" />
-          </div>
-          <span className="commDescription">{positionMapping[playerCommInfo.position]}</span>
-        </div>
-      ) : (
-        <div className={'communicatorContainer'} onDoubleClick={handleCommunicationClick}>
-          <img
-            className={classNames('communicatorImage', { canCommunicate })}
-            src={communicationToken}
-            alt="Communication Token"
-          />
-        </div>
-      )}
+      {renderComm()}
     </div>
   );
 };

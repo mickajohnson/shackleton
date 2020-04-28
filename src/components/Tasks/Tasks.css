@@ -201,3 +201,7 @@
   position: absolute;
   bottom: -20px;
 }
+
+.playerAreaLeft .commDescription {
+  bottom: -30px;
+}

@@ -20,8 +20,6 @@ const HandCard = ({ card, style, player, orientation }) => {
   } = useContext(GameContext);
   const { currentPlayer, whoseTurn } = useContext(PlayerContext);
 
-  console.log(player, currentPlayer, player === currentPlayer, card.number, card.color);
-
   const canPlay =
     player === currentPlayer &&
     !trick[player] &&
