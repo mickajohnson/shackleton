@@ -23,6 +23,7 @@ export const GameContextProvider = ({ children }) => {
   const [communicationInfo, setCommunicationInfo] = useState({});
   const [personCommunicating, setPersonCommunicating] = useState(null);
   const [pickCommLocation, setPickCommLocation] = useState(null);
+  const [extraRules, setExtraRules] = useState({});
 
   const socket = useContext(SocketContext);
   const { currentPlayer, players } = useContext(PlayerContext);
@@ -78,6 +79,14 @@ export const GameContextProvider = ({ children }) => {
     if (socket) {
       socket.on('communicating', (person) => {
         setPersonCommunicating(person);
+      });
+    }
+  }, [socket]);
+
+  useEffect(() => {
+    if (socket) {
+      socket.on('extraRules', (rules) => {
+        setExtraRules(rules);
       });
     }
   }, [socket]);
@@ -190,6 +199,7 @@ export const GameContextProvider = ({ children }) => {
     pickCommLocation,
     chooseCommunicatorLocation,
     selectMission,
+    extraRules,
   };
 
   return <GameContext.Provider value={state}>{children}</GameContext.Provider>;

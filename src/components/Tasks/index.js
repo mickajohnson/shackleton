@@ -1,97 +1,18 @@
 import React, { useContext, useMemo } from 'react';
-import classNames from 'classnames';
-import { map, every, values, get } from 'lodash';
+import { map } from 'lodash';
 import './Tasks.css';
 
-import GameContext, { CARD_PLAYING } from '../../context/GameContext';
-import communicationToken from '../../assets/helper_token.png';
-import flippedCommToken from '../../assets/helper_token_inactive.png';
+import GameContext from '../../context/GameContext';
 import TaskCard from '../TaskCard';
-import PlayerContext from '../../context/PlayerContext';
-import HandCard from '../HandCard';
 
-const positionMapping = {
-  top: 'Highest',
-  middle: 'Only',
-  bottom: 'Lowest',
-};
+import Communicator from '../Communicator';
 
 const Tasks = ({ player, orientation }) => {
-  const {
-    tasks,
-    initiateCommunication,
-    trick,
-    gamePhase,
-    personCommunicating,
-    communicationInfo,
-  } = useContext(GameContext);
-  const { currentPlayer } = useContext(PlayerContext);
+  const { tasks } = useContext(GameContext);
   const playerTasks = useMemo(() => tasks.filter((task) => task.asignee === player), [
     tasks,
     player,
   ]);
-
-  const playerCommInfo = get(communicationInfo, player, {});
-  const haveAlreadyCommunicated = playerCommInfo.played;
-
-  const canCommunicate =
-    every(values(trick), (val) => val === null) &&
-    gamePhase === CARD_PLAYING &&
-    player === currentPlayer &&
-    !personCommunicating &&
-    !haveAlreadyCommunicated;
-
-  const handleCommunicationClick = () => {
-    if (canCommunicate) {
-      initiateCommunication();
-    }
-  };
-
-  const renderComm = () => {
-    if (haveAlreadyCommunicated) {
-      if (playerCommInfo.card) {
-        return (
-          <div className="playedCommArea">
-            <HandCard player={player} card={playerCommInfo.card} orientation={orientation} />
-            <div
-              className={classNames('playedCommTokenContainer', {
-                commTop: playerCommInfo.position === 'top',
-                commMiddle: playerCommInfo.position === 'middle',
-                commBottom: playerCommInfo.position === 'bottom',
-              })}
-            >
-              <img
-                className="communicatorImage"
-                src={communicationToken}
-                alt="Communication Token"
-              />
-            </div>
-            <span className="commDescription">{positionMapping[playerCommInfo.position]}</span>
-          </div>
-        );
-      } else {
-        return (
-          <div className={'communicatorContainer'}>
-            <img
-              className={classNames('communicatorImage')}
-              src={flippedCommToken}
-              alt="Flipped Communication Token"
-            />
-          </div>
-        );
-      }
-    }
-
-    return (
-      <div className={'communicatorContainer'} onDoubleClick={handleCommunicationClick}>
-        <img
-          className={classNames('communicatorImage', { canCommunicate })}
-          src={communicationToken}
-          alt="Communication Token"
-        />
-      </div>
-    );
-  };
 
   return (
     <div className="tasksAndCommunicatorArea">
@@ -107,7 +28,7 @@ const Tasks = ({ player, orientation }) => {
           </React.Fragment>
         ))}
       </div>
-      {renderComm()}
+      <Communicator player={player} orientation={orientation} />
     </div>
   );
 };
