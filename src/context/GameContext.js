@@ -181,6 +181,8 @@ export const GameContextProvider = ({ children }) => {
 
   const startGame = () => socket.emit('startGame');
 
+  console.log(tasks);
+
   const state = {
     gamePhase,
     startGame,
