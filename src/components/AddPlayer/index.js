@@ -5,7 +5,7 @@ import './AddPlayer.css';
 const AddPlayer = () => {
   const [name, setName] = useState('');
 
-  const { addPlayer } = useContext(PlayerContext);
+  const { addPlayer, players } = useContext(PlayerContext);
 
   const handleInputChange = (e) => {
     setName(e.target.value);
@@ -15,6 +15,8 @@ const AddPlayer = () => {
     addPlayer(name);
     setName('');
   };
+
+  const buttonDisabled = name.length < 1 || players.includes(name);
 
   return (
     <React.Fragment>
@@ -33,7 +35,7 @@ const AddPlayer = () => {
           Name
         </label>
       </div>
-      <button disabled={name.length < 1} className="startButton" onClick={handleSubmit}>
+      <button disabled={buttonDisabled} className="startButton" onClick={handleSubmit}>
         Join our Voyage
       </button>
     </React.Fragment>

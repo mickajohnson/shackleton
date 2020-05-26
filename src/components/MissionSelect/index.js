@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import missions from './missions';
 import GameContext from '../../context/GameContext';
+import { NoClickOutlineButton } from '../NoClickOutline';
 import './MissionSelect.css';
 
 const MissionSelect = () => {
@@ -19,14 +20,14 @@ const MissionSelect = () => {
         <span className="missionsHeader">Missions</span>
         <div className="missionsContainer">
           {missions.map((mission) => (
-            <button
+            <NoClickOutlineButton
               className="missionButton"
               disabled={!mission.playable}
               onClick={() => handleSelectMission(mission)}
               key={mission.number}
             >
               {mission.number}
-            </button>
+            </NoClickOutlineButton>
           ))}
         </div>
       </div>
