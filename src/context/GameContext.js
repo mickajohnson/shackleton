@@ -24,6 +24,7 @@ export const GameContextProvider = ({ children }) => {
   const [personCommunicating, setPersonCommunicating] = useState(null);
   const [pickCommLocation, setPickCommLocation] = useState(null);
   const [extraRules, setExtraRules] = useState({});
+  const [inWaitingRoom, setInWatingRoom] = useState(false);
 
   const socket = useContext(SocketContext);
   const { currentPlayer, players } = useContext(PlayerContext);
@@ -58,6 +59,28 @@ export const GameContextProvider = ({ children }) => {
   const initiateCommunication = () => {
     socket.emit('initiateCommunication', currentPlayer);
   };
+
+  const onPlayAgainClick = () => {
+    socket.emit('playAgain');
+  };
+
+  useEffect(() => {
+    if (socket) {
+      socket.on('reset', () => {
+        setGamePhase(SIGN_IN);
+        setHand([]);
+        setTrickSuit(null);
+        setTrick({});
+        setTrickWinner(null);
+        setTasks([]);
+        setCommunicationInfo({});
+        setPersonCommunicating(null);
+        setPickCommLocation(null);
+        setExtraRules({});
+        setInWatingRoom(false);
+      });
+    }
+  }, [socket]);
 
   useEffect(() => {
     if (socket) {
@@ -112,6 +135,14 @@ export const GameContextProvider = ({ children }) => {
     if (socket) {
       socket.on('won', () => {
         setGamePhase(WON);
+      });
+    }
+  }, [socket]);
+
+  useEffect(() => {
+    if (socket) {
+      socket.on('gameInProgress', () => {
+        setInWatingRoom(true);
       });
     }
   }, [socket]);
@@ -202,6 +233,8 @@ export const GameContextProvider = ({ children }) => {
     chooseCommunicatorLocation,
     selectMission,
     extraRules,
+    onPlayAgainClick,
+    inWaitingRoom,
   };
 
   return <GameContext.Provider value={state}>{children}</GameContext.Provider>;

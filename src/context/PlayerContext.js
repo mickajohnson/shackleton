@@ -28,6 +28,19 @@ export const PlayerContextProvider = ({ children }) => {
     }
   }, [players, currentPlayer]);
 
+  useEffect(() => {
+    if (socket) {
+      socket.on('reset', () => {
+        setPlayers([]);
+        setCurrentPlayer(null);
+        setPlayerNumbers({});
+        setCaptain(null);
+        setWhoseTurn(null);
+        setTrickZIndices({});
+      });
+    }
+  }, [socket]);
+
   // useEffect(() => {
   //   if (players.length === 0) {
   //     localStorage.removeItem('player');

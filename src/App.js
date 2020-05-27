@@ -3,6 +3,7 @@ import LoginScreen from './components/LoginScreen';
 import GameScreen from './components/GameScreen';
 import EndScreen from './components/EndScreen';
 import MissionSelect from './components/MissionSelect';
+import WaitingRoom from './components/WaitingRoom';
 import GameContext, {
   SIGN_IN,
   CARD_PLAYING,
@@ -13,7 +14,10 @@ import GameContext, {
 } from './context/GameContext';
 import './App.css';
 
-const Router = ({ gamePhase }) => {
+const Router = ({ gamePhase, inWaitingRoom }) => {
+  if (inWaitingRoom) {
+    return <WaitingRoom />;
+  }
   switch (gamePhase) {
     case SIGN_IN:
       return <LoginScreen />;
@@ -31,11 +35,11 @@ const Router = ({ gamePhase }) => {
 };
 
 const App = () => {
-  const { gamePhase } = useContext(GameContext);
+  const { gamePhase, inWaitingRoom } = useContext(GameContext);
 
   return (
     <div className="mainContainer">
-      <Router gamePhase={gamePhase} />
+      <Router gamePhase={gamePhase} inWaitingRoom={inWaitingRoom} />
     </div>
   );
 };

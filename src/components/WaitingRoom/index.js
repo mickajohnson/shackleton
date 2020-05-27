@@ -1,19 +1,18 @@
 import React, { useContext } from 'react';
 import GameContext from '../../context/GameContext';
 import { NoClickOutlineButton } from '../NoClickOutline';
-import './EndScreen.css';
 
-const EndScreen = () => {
-  const { gamePhase, onPlayAgainClick } = useContext(GameContext);
+const WatingRoom = () => {
+  const { onPlayAgainClick } = useContext(GameContext);
 
   return (
     <div className="centeredContainer">
-      <h1>YOU {gamePhase}</h1>
+      <h1>Game In Progress</h1>
       <NoClickOutlineButton className="startButton" onClick={onPlayAgainClick}>
-        Play Again
+        Kill Game
       </NoClickOutlineButton>
     </div>
   );
 };
 
-export default EndScreen;
+export default WatingRoom;
