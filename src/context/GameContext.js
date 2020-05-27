@@ -84,6 +84,14 @@ export const GameContextProvider = ({ children }) => {
 
   useEffect(() => {
     if (socket) {
+      socket.on('rejoinedGame', () => {
+        setGamePhase(CARD_PLAYING);
+      });
+    }
+  }, [socket]);
+
+  useEffect(() => {
+    if (socket) {
       socket.on('gameStarted', () => {
         setGamePhase(TASK_SELECTION);
       });
@@ -211,8 +219,6 @@ export const GameContextProvider = ({ children }) => {
   }, [socket]);
 
   const startGame = () => socket.emit('startGame');
-
-  console.log(tasks);
 
   const state = {
     gamePhase,

@@ -22,3 +22,20 @@
   display: grid;
   grid-template-columns: 140px 1fr 140px;
 }
+.stopGameButtonContainer {
+  grid-column-start: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stopGameButton {
+  border-radius: 25px;
+  background: #1e324a;
+  color: white;
+  font-family: courier;
+  border: none;
+  padding: 14px 25px;
+  font-size: 14px;
+  cursor: pointer;
+}

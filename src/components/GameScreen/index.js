@@ -9,10 +9,11 @@ import './GameScreen.css';
 import GameContext, { TASK_SELECTION } from '../../context/GameContext';
 import PlayerArea from '../PlayerArea';
 import Announcement from '../Announcement';
+import { NoClickOutlineButton } from '../NoClickOutline';
 
 const GameScreen = () => {
   const { currentPlayer, playerNumbers } = useContext(PlayerContext);
-  const { gamePhase, pickCommLocation } = useContext(GameContext);
+  const { gamePhase, pickCommLocation, onPlayAgainClick } = useContext(GameContext);
 
   const renderMiddleArea = () => {
     if (gamePhase === TASK_SELECTION) {
@@ -29,6 +30,11 @@ const GameScreen = () => {
           {playerNumbers[2] ? (
             <PlayerArea className="player2Area" player={playerNumbers[2]} orientation="top" />
           ) : null}
+          <div className="stopGameButtonContainer">
+            <NoClickOutlineButton className="stopGameButton" onClick={onPlayAgainClick}>
+              Stop Game
+            </NoClickOutlineButton>
+          </div>
         </div>
         <div className="middleGameScreen">
           {playerNumbers[1] ? (

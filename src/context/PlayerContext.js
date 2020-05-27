@@ -21,7 +21,6 @@ export const PlayerContextProvider = ({ children }) => {
   const socket = useContext(SocketContext);
 
   useEffect(() => {
-    // const player = localStorage.getItem('player');
     const player = null;
     if (players.length > 0 && player && !currentPlayer) {
       setCurrentPlayer(player);
@@ -31,6 +30,8 @@ export const PlayerContextProvider = ({ children }) => {
   useEffect(() => {
     if (socket) {
       socket.on('reset', () => {
+        localStorage.removeItem('player');
+
         setPlayers([]);
         setCurrentPlayer(null);
         setPlayerNumbers({});
@@ -40,12 +41,6 @@ export const PlayerContextProvider = ({ children }) => {
       });
     }
   }, [socket]);
-
-  // useEffect(() => {
-  //   if (players.length === 0) {
-  //     localStorage.removeItem('player');
-  //   }
-  // }, [players]);
 
   useEffect(() => {
     if (socket) {
@@ -103,10 +98,19 @@ export const PlayerContextProvider = ({ children }) => {
       setPlayers((players) => [...players, name]);
       socket.emit('addPlayer', name);
       setCurrentPlayer(name);
-      // localStorage.setItem('player', name);
+      localStorage.setItem('player', name);
     },
     [socket]
   );
+
+  useEffect(() => {
+    if (socket) {
+      socket.on('successfulReeconnect', () => {
+        const existingPlayer = localStorage.getItem('player');
+        setCurrentPlayer(existingPlayer);
+      });
+    }
+  }, [socket]);
 
   const state = {
     currentPlayer,
