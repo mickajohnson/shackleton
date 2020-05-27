@@ -16,7 +16,11 @@ const AddPlayer = () => {
     setName('');
   };
 
-  const buttonDisabled = name.length < 1 || players.includes(name);
+  const buttonDisabled = name.length < 1 || players.includes(name) || players.length > 3;
+
+  if (players.length > 3) {
+    return null;
+  }
 
   return (
     <React.Fragment>

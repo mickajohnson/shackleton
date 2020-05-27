@@ -33,7 +33,7 @@ const LoginScreen = () => {
               )}
 
               {currentPlayer ? (
-                <button className="startButton" onClick={startGame}>
+                <button className="startButton" disabled={players.length < 3} onClick={startGame}>
                   Start Game
                 </button>
               ) : (
